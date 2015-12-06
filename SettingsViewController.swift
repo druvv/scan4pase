@@ -57,8 +57,10 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         defaults.setObject(cFP!, forKey: "cFP")
         defaults.setObject(ibo, forKey:"iboOrCustomer")
         defaults.setObject(email, forKey:"iboEmail")
-        let alert: UIAlertView = UIAlertView(title: "Saved", message: "Settings Saved", delegate: self, cancelButtonTitle: "Ok")
-        alert.show()
+        let alert: UIAlertController = UIAlertController(title: "Saved", message: "Settings Saved", preferredStyle: .Alert)
+        let action: UIAlertAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Cancel, handler: {action in})
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: {})
     }
     @IBAction func dismissKeyboard(sender: AnyObject) {
         resignFirstResponder()

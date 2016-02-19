@@ -41,16 +41,16 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
     
     @IBAction func save(sender: AnyObject) {
         let defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let tax : String? = taxField.text
+        var tax : String? = taxField.text
         let email : String? = emailField.text
         let ibo : Bool = iboSwitch.on
-        let cFP : String? = cFPField.text
+        var cFP : String? = cFPField.text
         
         if ((tax!).characters.count == 0) {
-            tax == "0"
+            tax = "0"
         }
         if ((cFP!).characters.count == 0){
-            cFP == "0"
+            cFP = "0"
         }
         
         defaults.setObject(tax!, forKey: "taxPref")

@@ -12,6 +12,7 @@ import Foundation
 
 class EditItemViewController: UIViewController, UIAlertViewDelegate {
     var product : NSDictionary?
+    // if the view has been instantiated to edit a product
     var edit : Bool = false
     
     @IBOutlet var nameField: UITextField!
@@ -21,6 +22,7 @@ class EditItemViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet var retailCostField: UITextField!
     @IBOutlet var iboCostField: UITextField!
     @IBOutlet var deleteButton: UIButton!
+    @IBOutlet var saveButton: UIButton!
     
     // simple return if cancel
     @IBAction func cancel(sender: AnyObject) {
@@ -34,6 +36,7 @@ class EditItemViewController: UIViewController, UIAlertViewDelegate {
     @IBAction func saveEdit(sender: AnyObject) {
         let allProducts: NSArray = ITData.getAllProducts()
         
+        // checks if any of the textfields have invalid characters
         var b: Bool = true
         if hasAlphaCharacters(pvField.text!) || hasAlphaCharacters(bvField.text!) || hasAlphaCharacters(retailCostField.text!) || hasAlphaCharacters(iboCostField.text!) {
             b = false
@@ -166,6 +169,23 @@ class EditItemViewController: UIViewController, UIAlertViewDelegate {
         super.viewDidLoad()
         
         if (edit) {
+            // we don't want to allow editing of custom products only deletion
+            if (product!.valueForKey("custom") as! Bool) {
+                nameField.enabled = false
+                nameField.textColor = UIColor.lightGrayColor()
+                skuField.enabled = false
+                skuField.textColor = UIColor.lightGrayColor()
+                pvField.enabled = false
+                pvField.textColor = UIColor.lightGrayColor()
+                bvField.enabled = false
+                bvField.textColor = UIColor.lightGrayColor()
+                retailCostField.enabled = false
+                retailCostField.textColor = UIColor.lightGrayColor()
+                iboCostField.enabled = false
+                iboCostField.textColor = UIColor.lightGrayColor()
+                saveButton.hidden = true
+            }
+            
             nameField.text = product!.valueForKey("name") as? String
             skuField.text = product!.valueForKey("sku") as? String
             
@@ -181,8 +201,8 @@ class EditItemViewController: UIViewController, UIAlertViewDelegate {
             iboCostField.text = iboCost.stringValue
             
             // Problems Occur Without this
-            nameField.enabled = false
-            skuField.enabled = false
+           // nameField.enabled = false
+            //skuField.enabled = false
             
             if (product!.valueForKey("custom") as! Bool == false) {
                 deleteButton.hidden = true

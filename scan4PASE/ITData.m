@@ -38,7 +38,7 @@ static ITData *instance = nil;
     
     //Load CSV
     NSError *error;
-    NSString *filename = @"Sept-04-15-AmwayPriceFileFinal";
+    NSString *filename = @"ProductPriceGuide-Dec-30-2015";
     NSString *filePath = [[NSBundle mainBundle] pathForResource:filename ofType:@"txt"];
     NSString *csvString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
     
@@ -234,8 +234,8 @@ static ITData *instance = nil;
         NSLog(@"Array Failed!!!!!");
         //abort();
     }
-    NSManagedObject *lol = array[0];
-    return lol;
+    NSManagedObject *firstObject = array[0];
+    return firstObject;
 }
 
 

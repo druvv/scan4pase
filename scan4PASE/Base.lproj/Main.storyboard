@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bnJ-CY-LYN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bnJ-CY-LYN">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -470,9 +470,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="printHi:" destination="Nzm-6W-F1P" eventType="touchUpInside" id="EJW-Oi-8MX"/>
                                     <action selector="saveEdit:" destination="Nzm-6W-F1P" eventType="touchUpInside" id="abK-hO-aJn"/>
-                                    <action selector="saysHi:" destination="Nzm-6W-F1P" eventType="touchUpInside" id="nST-m7-6al"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ss-s7-FTH">
@@ -481,14 +479,6 @@
                                 <color key="textColor" red="0.0" green="0.41960784309999999" blue="0.83092619239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zdb-x4-iSR">
-                                <rect key="frame" x="16" y="340" width="288" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <action selector="dismissKeyboard:" destination="Nzm-6W-F1P" eventType="editingDidEndOnExit" id="jd5-T7-cUa"/>
-                                </connections>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTq-jd-c94">
                                 <rect key="frame" x="178" y="398" width="73" height="24"/>
                                 <constraints>
@@ -533,6 +523,14 @@
                                 <color key="textColor" red="0.0" green="0.41960784309999999" blue="0.83092619239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zdb-x4-iSR">
+                                <rect key="frame" x="16" y="340" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <action selector="dismissKeyboard:" destination="Nzm-6W-F1P" eventType="editingDidEndOnExit" id="jd5-T7-cUa"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -586,6 +584,7 @@
                         <outlet property="nameField" destination="KMA-1E-pwn" id="pdg-VL-bk1"/>
                         <outlet property="pvField" destination="dIK-ok-gZQ" id="PPs-xg-vPc"/>
                         <outlet property="retailCostField" destination="Ymt-jW-iWa" id="jOQ-n2-Fau"/>
+                        <outlet property="saveButton" destination="ibl-P3-wfx" id="ciS-m6-HKn"/>
                         <outlet property="skuField" destination="Va2-Xv-SYa" id="aZF-24-Tw2"/>
                     </connections>
                 </viewController>

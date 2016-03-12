@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bnJ-CY-LYN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bnJ-CY-LYN">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -279,7 +279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-Yc-PdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="843" y="454"/>
+            <point key="canvasLocation" x="-379" y="552"/>
         </scene>
         <!--Items-->
         <scene sceneID="bIh-a2-GkG">
@@ -383,7 +383,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="991" y="-138"/>
+            <point key="canvasLocation" x="47" y="564"/>
         </scene>
         <!--Edit Item View Controller-->
         <scene sceneID="g6Q-4Z-2Ft">
@@ -590,7 +590,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQU-ho-xls" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1426" y="-138"/>
+            <point key="canvasLocation" x="618" y="564"/>
         </scene>
         <!--Search-->
         <scene sceneID="MLr-Hw-mLl">
@@ -727,7 +727,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="550" y="1022"/>
+            <point key="canvasLocation" x="532" y="-118"/>
         </scene>
         <!--Details-->
         <scene sceneID="j68-sb-bCh">
@@ -809,19 +809,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: For Discount Enter Fractional Quantity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="j8j-Oh-Gho">
-                                <rect key="frame" x="0.0" y="439" width="320" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.65790374090000003" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="j8j-Oh-Gho" secondAttribute="trailing" id="THI-Kx-FcL"/>
-                            <constraint firstItem="L5f-4S-CtF" firstAttribute="top" secondItem="j8j-Oh-Gho" secondAttribute="bottom" id="axH-Th-5bT"/>
-                            <constraint firstItem="j8j-Oh-Gho" firstAttribute="leading" secondItem="zQo-yd-dh3" secondAttribute="leading" id="gX8-kr-yXC"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="eeK-xL-zpc"/>
                     <connections>
@@ -834,7 +823,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dm8-d8-ZR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1144" y="1022"/>
+            <point key="canvasLocation" x="948" y="-126"/>
         </scene>
         <!--Result-->
         <scene sceneID="I6H-4g-1zG">
@@ -987,7 +976,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c53-3f-T05" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="2439"/>
+            <point key="canvasLocation" x="1358" y="-126"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="MKZ-c6-2SZ">
@@ -1267,7 +1256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bb5-lJ-hg1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="-1613"/>
+            <point key="canvasLocation" x="976" y="-685"/>
         </scene>
         <!--Cart-->
         <scene sceneID="HJx-9h-J0Z">
@@ -1462,7 +1451,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s0X-EG-3XC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="-813"/>
+            <point key="canvasLocation" x="325" y="-729"/>
         </scene>
         <!--Help-->
         <scene sceneID="iUL-Jh-8mb">
@@ -1503,7 +1492,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXW-dv-tdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="520"/>
+            <point key="canvasLocation" x="1298" y="552"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SpD-US-VBB">
@@ -1520,7 +1509,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXZ-jb-NIZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-664" y="-158"/>
+            <point key="canvasLocation" x="-564" y="-152"/>
         </scene>
     </scenes>
     <resources>

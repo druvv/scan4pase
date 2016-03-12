@@ -38,7 +38,7 @@ static ITData *instance = nil;
     
     //Load CSV
     NSError *error;
-    NSString *filename = @"ProductPriceGuide-Dec-30-2015";
+    NSString *filename = @"amwayproducts-mar12-2016";
     NSString *filePath = [[NSBundle mainBundle] pathForResource:filename ofType:@"txt"];
     NSString *csvString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
     

@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		094A90B07DDA9E94B8D80FC9 /* libPods-scan4PASE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 603BE0F4D88C0867B283E437 /* libPods-scan4PASE.a */; };
-		1627FBEF8AC1BD49B0D2077D /* libPods-scan4PASETests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B1FB454F7D13B79F7E4EA9 /* libPods-scan4PASETests.a */; };
+		60A5EF3D28A2FEEA5A604564 /* Pods_scan4PASE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF3B863C30DA0CF37970AF9 /* Pods_scan4PASE.framework */; };
 		FC105F291829A6380020B7AF /* iTunesArtworkRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = FC105F281829A6380020B7AF /* iTunesArtworkRounded.png */; };
 		FC105F2C182AEB350020B7AF /* ITData.m in Sources */ = {isa = PBXBuildFile; fileRef = FC105F2B182AEB350020B7AF /* ITData.m */; };
 		FC105F2F182B16A90020B7AF /* ITHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = FC105F2E182B16A90020B7AF /* ITHelp.m */; };
@@ -32,11 +31,6 @@
 		FC7D8F5117CA443A002C672A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7D8F4F17CA443A002C672A /* Main.storyboard */; };
 		FC7D8F5417CA443A002C672A /* ITViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7D8F5317CA443A002C672A /* ITViewController.m */; };
 		FC7D8F5617CA443A002C672A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7D8F5517CA443A002C672A /* Images.xcassets */; };
-		FC7D8F5D17CA443A002C672A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7D8F5C17CA443A002C672A /* XCTest.framework */; };
-		FC7D8F5E17CA443A002C672A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7D8F3D17CA443A002C672A /* Foundation.framework */; };
-		FC7D8F5F17CA443A002C672A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7D8F4117CA443A002C672A /* UIKit.framework */; };
-		FC7D8F6717CA443A002C672A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC7D8F6517CA443A002C672A /* InfoPlist.strings */; };
-		FC7D8F6917CA443A002C672A /* scan4PASETests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7D8F6817CA443A002C672A /* scan4PASETests.m */; };
 		FC7D8F7917CA4466002C672A /* ITInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7D8F7817CA4466002C672A /* ITInfoViewController.m */; };
 		FC7D8F9E17CA450E002C672A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7D8F9D17CA450E002C672A /* AVFoundation.framework */; };
 		FC7D8FA017CA451A002C672A /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7D8F9F17CA451A002C672A /* CoreMedia.framework */; };
@@ -65,23 +59,12 @@
 		FCF99F8D17F722D300EF9DED /* ITCheckoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF99F8C17F722D300EF9DED /* ITCheckoutCell.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		FC7D8F6017CA443A002C672A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FC7D8F3217CA443A002C672A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FC7D8F3917CA443A002C672A;
-			remoteInfo = scan4PASE;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		06B1FB454F7D13B79F7E4EA9 /* libPods-scan4PASETests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-scan4PASETests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2FC3B55973F21862CD65B384 /* Pods-scan4PASE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4PASE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scan4PASE/Pods-scan4PASE.debug.xcconfig"; sourceTree = "<group>"; };
-		3F7D8928AF3D26DD6EAF968F /* Pods-scan4PASETests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4PASETests.release.xcconfig"; path = "Pods/Target Support Files/Pods-scan4PASETests/Pods-scan4PASETests.release.xcconfig"; sourceTree = "<group>"; };
-		603BE0F4D88C0867B283E437 /* libPods-scan4PASE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-scan4PASE.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A6562084A59630ED1482B94 /* Pods-scan4PASE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4PASE.release.xcconfig"; path = "Pods/Target Support Files/Pods-scan4PASE/Pods-scan4PASE.release.xcconfig"; sourceTree = "<group>"; };
-		9E5F24ADCD35C5508AA60684 /* Pods-scan4PASETests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4PASETests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scan4PASETests/Pods-scan4PASETests.debug.xcconfig"; sourceTree = "<group>"; };
+		06A5F5C8151538118420DF7B /* Pods-scan4PASETests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4PASETests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scan4PASETests/Pods-scan4PASETests.debug.xcconfig"; sourceTree = "<group>"; };
+		12EAB32E16627633F18B8586 /* Pods-scan4PASETests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4PASETests.release.xcconfig"; path = "Pods/Target Support Files/Pods-scan4PASETests/Pods-scan4PASETests.release.xcconfig"; sourceTree = "<group>"; };
+		17A8F96F0B738AFFBCE7B159 /* Pods-scan4PASE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4PASE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scan4PASE/Pods-scan4PASE.debug.xcconfig"; sourceTree = "<group>"; };
+		2332DA456A880915959D929A /* Pods-scan4PASE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4PASE.release.xcconfig"; path = "Pods/Target Support Files/Pods-scan4PASE/Pods-scan4PASE.release.xcconfig"; sourceTree = "<group>"; };
+		ACF3B863C30DA0CF37970AF9 /* Pods_scan4PASE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_scan4PASE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC105F281829A6380020B7AF /* iTunesArtworkRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtworkRounded.png; sourceTree = "<group>"; };
 		FC105F2A182AEB350020B7AF /* ITData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITData.h; sourceTree = "<group>"; };
 		FC105F2B182AEB350020B7AF /* ITData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITData.m; sourceTree = "<group>"; };
@@ -114,8 +97,6 @@
 		FC7D8F5217CA443A002C672A /* ITViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITViewController.h; sourceTree = "<group>"; };
 		FC7D8F5317CA443A002C672A /* ITViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITViewController.m; sourceTree = "<group>"; };
 		FC7D8F5517CA443A002C672A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		FC7D8F5B17CA443A002C672A /* scan4PASETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = scan4PASETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC7D8F5C17CA443A002C672A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		FC7D8F6417CA443A002C672A /* scan4PASETests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "scan4PASETests-Info.plist"; sourceTree = "<group>"; };
 		FC7D8F6617CA443A002C672A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FC7D8F6817CA443A002C672A /* scan4PASETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = scan4PASETests.m; sourceTree = "<group>"; };
@@ -128,9 +109,6 @@
 		FC8127541831B63700331BEE /* ITScanDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITScanDetails.h; path = ../ITScanDetails.h; sourceTree = "<group>"; };
 		FC8127551831B63700331BEE /* ITScanDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITScanDetails.m; path = ../ITScanDetails.m; sourceTree = "<group>"; };
 		FC9259161B99FB2B00CCCE1E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		FC9259221B9A00E900CCCE1E /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzbar.a; path = scan4PASE/ZBarSDK/libzbar.a; sourceTree = "<group>"; };
-		FC9439721B9A064900A0C225 /* libZBarSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZBarSDK.a; path = "Pods/../build/Debug-iphoneos/libZBarSDK.a"; sourceTree = "<group>"; };
-		FC9439741B9A064D00A0C225 /* libPods-scan4PASETests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-scan4PASETests.a"; path = "Pods/../build/Debug-iphoneos/libPods-scan4PASETests.a"; sourceTree = "<group>"; };
 		FCA03A671AB7A07300586D4E /* ItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		FCA03A6B1AB7A18200586D4E /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemTableViewCell.swift; path = ../ItemTableViewCell.swift; sourceTree = "<group>"; };
 		FCA03A6D1AB7A26500586D4E /* EditItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
@@ -171,31 +149,20 @@
 				FC7D8F4017CA443A002C672A /* CoreGraphics.framework in Frameworks */,
 				FC7D8F4217CA443A002C672A /* UIKit.framework in Frameworks */,
 				FC7D8F3E17CA443A002C672A /* Foundation.framework in Frameworks */,
-				094A90B07DDA9E94B8D80FC9 /* libPods-scan4PASE.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FC7D8F5817CA443A002C672A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FC7D8F5D17CA443A002C672A /* XCTest.framework in Frameworks */,
-				FC7D8F5F17CA443A002C672A /* UIKit.framework in Frameworks */,
-				FC7D8F5E17CA443A002C672A /* Foundation.framework in Frameworks */,
-				1627FBEF8AC1BD49B0D2077D /* libPods-scan4PASETests.a in Frameworks */,
+				60A5EF3D28A2FEEA5A604564 /* Pods_scan4PASE.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D0DD97E1EEE3B0F4C62D083 /* Pods */ = {
+		80D691741BF77FD9F217BADF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2FC3B55973F21862CD65B384 /* Pods-scan4PASE.debug.xcconfig */,
-				6A6562084A59630ED1482B94 /* Pods-scan4PASE.release.xcconfig */,
-				9E5F24ADCD35C5508AA60684 /* Pods-scan4PASETests.debug.xcconfig */,
-				3F7D8928AF3D26DD6EAF968F /* Pods-scan4PASETests.release.xcconfig */,
+				17A8F96F0B738AFFBCE7B159 /* Pods-scan4PASE.debug.xcconfig */,
+				2332DA456A880915959D929A /* Pods-scan4PASE.release.xcconfig */,
+				06A5F5C8151538118420DF7B /* Pods-scan4PASETests.debug.xcconfig */,
+				12EAB32E16627633F18B8586 /* Pods-scan4PASETests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -216,7 +183,7 @@
 				FC7D8F6217CA443A002C672A /* scan4PASETests */,
 				FC7D8F3C17CA443A002C672A /* Frameworks */,
 				FC7D8F3B17CA443A002C672A /* Products */,
-				3D0DD97E1EEE3B0F4C62D083 /* Pods */,
+				80D691741BF77FD9F217BADF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -224,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				FC7D8F3A17CA443A002C672A /* scan4PASE.app */,
-				FC7D8F5B17CA443A002C672A /* scan4PASETests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,9 +198,6 @@
 		FC7D8F3C17CA443A002C672A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FC9439741B9A064D00A0C225 /* libPods-scan4PASETests.a */,
-				FC9439721B9A064900A0C225 /* libZBarSDK.a */,
-				FC9259221B9A00E900CCCE1E /* libzbar.a */,
 				FC9259161B99FB2B00CCCE1E /* AudioToolbox.framework */,
 				FCE8856218359A9E00A1D839 /* MessageUI.framework */,
 				FC7D8FA317CA4529002C672A /* QuartzCore.framework */,
@@ -244,9 +207,7 @@
 				FC7D8F3D17CA443A002C672A /* Foundation.framework */,
 				FC7D8F3F17CA443A002C672A /* CoreGraphics.framework */,
 				FC7D8F4117CA443A002C672A /* UIKit.framework */,
-				FC7D8F5C17CA443A002C672A /* XCTest.framework */,
-				603BE0F4D88C0867B283E437 /* libPods-scan4PASE.a */,
-				06B1FB454F7D13B79F7E4EA9 /* libPods-scan4PASETests.a */,
+				ACF3B863C30DA0CF37970AF9 /* Pods_scan4PASE.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -345,11 +306,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC7D8F6C17CA443A002C672A /* Build configuration list for PBXNativeTarget "scan4PASE" */;
 			buildPhases = (
-				358CE0EFB189A821D8908DE8 /* Check Pods Manifest.lock */,
+				E0661CB365C2C28F768CC210 /* 📦 Check Pods Manifest.lock */,
 				FC7D8F3617CA443A002C672A /* Sources */,
 				FC7D8F3717CA443A002C672A /* Frameworks */,
 				FC7D8F3817CA443A002C672A /* Resources */,
-				94ACBBCCFAABD00243F38FA6 /* Copy Pods Resources */,
+				181E7FE7A39300D6270F3526 /* 📦 Embed Pods Frameworks */,
+				A08C27914FC620A6EC8FE3FF /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -359,26 +321,6 @@
 			productName = scan4PASE;
 			productReference = FC7D8F3A17CA443A002C672A /* scan4PASE.app */;
 			productType = "com.apple.product-type.application";
-		};
-		FC7D8F5A17CA443A002C672A /* scan4PASETests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FC7D8F6F17CA443A002C672A /* Build configuration list for PBXNativeTarget "scan4PASETests" */;
-			buildPhases = (
-				992DA25C0E280064C826ECE0 /* Check Pods Manifest.lock */,
-				FC7D8F5717CA443A002C672A /* Sources */,
-				FC7D8F5817CA443A002C672A /* Frameworks */,
-				FC7D8F5917CA443A002C672A /* Resources */,
-				99B58883C7525C5DDB476F51 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FC7D8F6117CA443A002C672A /* PBXTargetDependency */,
-			);
-			name = scan4PASETests;
-			productName = scan4PASETests;
-			productReference = FC7D8F5B17CA443A002C672A /* scan4PASETests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -394,9 +336,6 @@
 				TargetAttributes = {
 					FC7D8F3917CA443A002C672A = {
 						DevelopmentTeam = M23B6AYLDX;
-					};
-					FC7D8F5A17CA443A002C672A = {
-						TestTargetID = FC7D8F3917CA443A002C672A;
 					};
 				};
 			};
@@ -414,7 +353,6 @@
 			projectRoot = "";
 			targets = (
 				FC7D8F3917CA443A002C672A /* scan4PASE */,
-				FC7D8F5A17CA443A002C672A /* scan4PASETests */,
 			);
 		};
 /* End PBXProject section */
@@ -448,40 +386,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC7D8F5917CA443A002C672A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FC7D8F6717CA443A002C672A /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		358CE0EFB189A821D8908DE8 /* Check Pods Manifest.lock */ = {
+		181E7FE7A39300D6270F3526 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-scan4PASE/Pods-scan4PASE-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		94ACBBCCFAABD00243F38FA6 /* Copy Pods Resources */ = {
+		A08C27914FC620A6EC8FE3FF /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,34 +419,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-scan4PASE/Pods-scan4PASE-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		992DA25C0E280064C826ECE0 /* Check Pods Manifest.lock */ = {
+		E0661CB365C2C28F768CC210 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		99B58883C7525C5DDB476F51 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-scan4PASETests/Pods-scan4PASETests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -548,23 +463,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC7D8F5717CA443A002C672A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FC7D8F6917CA443A002C672A /* scan4PASETests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		FC7D8F6117CA443A002C672A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FC7D8F3917CA443A002C672A /* scan4PASE */;
-			targetProxy = FC7D8F6017CA443A002C672A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FC7D8F4617CA443A002C672A /* InfoPlist.strings */ = {
@@ -671,7 +570,7 @@
 		};
 		FC7D8F6D17CA443A002C672A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FC3B55973F21862CD65B384 /* Pods-scan4PASE.debug.xcconfig */;
+			baseConfigurationReference = 17A8F96F0B738AFFBCE7B159 /* Pods-scan4PASE.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -706,7 +605,7 @@
 		};
 		FC7D8F6E17CA443A002C672A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A6562084A59630ED1482B94 /* Pods-scan4PASE.release.xcconfig */;
+			baseConfigurationReference = 2332DA456A880915959D929A /* Pods-scan4PASE.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -738,50 +637,6 @@
 			};
 			name = Release;
 		};
-		FC7D8F7017CA443A002C672A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E5F24ADCD35C5508AA60684 /* Pods-scan4PASETests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/scan4PASE.app/scan4PASE";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "scan4PASE/scan4PASE-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "scan4PASETests/scan4PASETests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "Sringari Worldwide.com.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		FC7D8F7117CA443A002C672A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F7D8928AF3D26DD6EAF968F /* Pods-scan4PASETests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/scan4PASE.app/scan4PASE";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "scan4PASE/scan4PASE-Prefix.pch";
-				INFOPLIST_FILE = "scan4PASETests/scan4PASETests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "Sringari Worldwide.com.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -799,15 +654,6 @@
 			buildConfigurations = (
 				FC7D8F6D17CA443A002C672A /* Debug */,
 				FC7D8F6E17CA443A002C672A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FC7D8F6F17CA443A002C672A /* Build configuration list for PBXNativeTarget "scan4PASETests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FC7D8F7017CA443A002C672A /* Debug */,
-				FC7D8F7117CA443A002C672A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

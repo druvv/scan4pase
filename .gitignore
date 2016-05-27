@@ -6,6 +6,9 @@
 build/
 DerivedData/
 
+##Firebase
+Firebase/
+
 ## Various settings
 *.pbxuser
 !default.pbxuser

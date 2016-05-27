@@ -111,7 +111,7 @@
     NSString *alertText;
     NSString *alertButton;
     
-    BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
+    BOOL canOpenSettings = (UIApplicationOpenSettingsURLString != NULL);
     if (canOpenSettings)
     {
         alertText = @"It looks like your privacy settings are preventing us from accessing your camera to do barcode scanning. You can fix this by doing the following:\n\n1. Touch the Go button below to open the Settings app.\n\n2. Touch Privacy.\n\n3. Turn the Camera on.\n\n4. Open this app and try again.";
@@ -180,7 +180,7 @@
 {
     if (alertView.tag == 3491832)
     {
-        BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
+        BOOL canOpenSettings = (UIApplicationOpenSettingsURLString != NULL);
         if (canOpenSettings)
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     }

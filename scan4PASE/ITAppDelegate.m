@@ -29,6 +29,9 @@
     [defaults registerDefaults:appDefaults];
     [defaults synchronize];
     
+    // Add Firebase
+    [FIRApp configure];
+    
     return YES;
 }
 

@@ -11,12 +11,13 @@
 #import "ITSearchPopupCell.h"
 #import "ITScanDetails.h"
 
-@interface ITSearchPopUp : UITableViewController<UISearchControllerDelegate> {
+@interface ITSearchPopUp : UITableViewController<UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate> {
     ITData *mainData;
     
     NSArray *searchResults;
 }
 
 @property (nonatomic, strong)NSMutableArray *allProducts;
+@property (nonatomic, strong) UISearchController *searchController;
 
 @end

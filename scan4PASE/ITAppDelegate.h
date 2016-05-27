@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 Sringari Worldwide. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import Firebase;
 
 @interface ITAppDelegate : UIResponder <UIApplicationDelegate>
 

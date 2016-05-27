@@ -34,7 +34,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    _searchController.searchResultsUpdater = self;
+    _searchController.dimsBackgroundDuringPresentation = false;
+    _searchController.searchBar.delegate = self;
     
+    self.tableView.tableHeaderView = _searchController.searchBar;
+    self.definesPresentationContext = YES;
     
     mainData = [ITData getInstance];
     
@@ -53,23 +59,17 @@
 
 #pragma mark - Table view data source
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
+- (void)filterContentForSearchText:(NSString*)searchText {
     
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name Contains[cd] %@ OR sku Contains[cd] %@", searchText,searchText];
     
     searchResults = [allProducts filteredArrayUsingPredicate:resultPredicate];
 }
 
-
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self filterContentForSearchText:searchString
-                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
-                                      objectAtIndex:[self.searchDisplayController.searchBar
-                                                     selectedScopeButtonIndex]]];
-    
-    return YES;
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSString *searchString = searchController.searchBar.text;
+    [self filterContentForSearchText:searchString];
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -134,7 +134,6 @@
                                     indexPathForSelectedRow];
         
         mainData = [ITData getInstance];
-        myIndexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
         [mainData setCurrentProduct:[[searchResults objectAtIndex:myIndexPath.row] mutableCopy]];
 
     }

@@ -250,14 +250,12 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [NSString stringWithFormat:@"%@/products.csv", documentsDirectory];
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage referenceForURL:@"gs://project-2924719563810163534.appspot.com/"];
     FIRStorageReference *fileRef = [storageRef child:@"products.csv"];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        __block NSDate *date = nil;
         
         UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] init];
         indicator.translatesAutoresizingMaskIntoConstraints = NO;
@@ -275,42 +273,13 @@
         [indicator startAnimating];
         
         [self presentViewController:activityAlert animated:true completion: ^{
-            [fileRef metadataWithCompletion:^(FIRStorageMetadata *metadata, NSError *error) {
-                if (error != nil) {
-                    [activityAlert dismissViewControllerAnimated:true completion:^ {
-                        completion(true);
-                    }];
-                } else {
-                    date = metadata.timeCreated;
-                    
-                    if (date == [settings objectForKey:@"timestamp"]) {
-                        [activityAlert dismissViewControllerAnimated:true completion:^ {
-                            completion(true);
-                        }];
-                    } else {
-                        [settings setObject:date forKey:@"timestamp"];
-                        NSError *error = nil;
-                        [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
-                        
-                        if (error != nil) {
-                            NSLog(@"Failed to delete the csv file");
-                            [activityAlert dismissViewControllerAnimated:true completion:^ {
-                                completion(false);
-                            }];
-                        }  else {
-                            [fileRef writeToFile: [[NSURL alloc] initFileURLWithPath:filePath] completion: ^(NSURL *URL, NSError *error) {
-                                [activityAlert dismissViewControllerAnimated:true completion:^ {
-                                    if (error != nil) {
-                                        completion(false);
-                                    } else {
-                                        completion(true);
-                                    }
-                                }];
-                            }];
-                        }
-                    }
-                }
+            
+            [fileRef writeToFile: [[NSURL alloc] initFileURLWithPath:filePath] completion: ^(NSURL *URL, NSError *error) {
+                [activityAlert dismissViewControllerAnimated:true completion:^ {
+                    completion(true);
+                }];
             }];
+                
         }];
     } else {
         UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] init];
@@ -330,22 +299,15 @@
         
         [self presentViewController:activityAlert animated:true completion: ^{
             [fileRef writeToFile: [[NSURL alloc] initFileURLWithPath:filePath] completion: ^(NSURL *URL, NSError *error) {
-                if (error != nil) {
-                    [activityAlert dismissViewControllerAnimated:true completion:^ {
+                [activityAlert dismissViewControllerAnimated:true completion:^ {
+                    if (error != nil) {
                         completion(false);
-                    }];
-                } else {
-                    [fileRef metadataWithCompletion:^(FIRStorageMetadata *metadata, NSError *error) {
-                        [activityAlert dismissViewControllerAnimated:true completion:^ {
-                            if (error != nil) {
-                                completion(false);
-                            } else {
-                                [settings setObject:metadata.timeCreated forKey:@"timestamp"];
-                                completion(true);
-                            }
-                        }];
-                    }];
-                }
+                        
+                    } else {
+                        completion(true);
+                        
+                    }
+                }];
             }];
         }];
     }

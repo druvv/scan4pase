@@ -307,12 +307,14 @@
 			buildConfigurationList = FC7D8F6C17CA443A002C672A /* Build configuration list for PBXNativeTarget "scan4PASE" */;
 			buildPhases = (
 				E0661CB365C2C28F768CC210 /* 📦 Check Pods Manifest.lock */,
+				FCBE975C1CF95592009461E4 /* Set the build number automatically with git */,
 				FC7D8F3617CA443A002C672A /* Sources */,
 				FC7D8F3717CA443A002C672A /* Frameworks */,
 				FC7D8F3817CA443A002C672A /* Resources */,
 				181E7FE7A39300D6270F3526 /* 📦 Embed Pods Frameworks */,
 				A08C27914FC620A6EC8FE3FF /* 📦 Copy Pods Resources */,
 				FCF30B261CF7DAFA00055F7C /* Firebase */,
+				FCBE975D1CF955D2009461E4 /* Set Build Number to "Development" */,
 			);
 			buildRules = (
 			);
@@ -434,6 +436,34 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		FCBE975C1CF95592009461E4 /* Set the build number automatically with git */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set the build number automatically with git";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(git rev-list HEAD | wc -l | tr -d ' ')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		FCBE975D1CF955D2009461E4 /* Set Build Number to "Development" */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Build Number to \"Development\"";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion DEVELOPMENT\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 		FCF30B261CF7DAFA00055F7C /* Firebase */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -8,6 +8,7 @@
 
 #import "ITViewController.h"
 #import "ITHelp.h"
+@import ZBarSDK;
 
 @interface ITViewController ()
 
@@ -111,7 +112,7 @@
     NSString *alertText;
     NSString *alertButton;
     
-    BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
+    BOOL canOpenSettings = (UIApplicationOpenSettingsURLString != NULL);
     if (canOpenSettings)
     {
         alertText = @"It looks like your privacy settings are preventing us from accessing your camera to do barcode scanning. You can fix this by doing the following:\n\n1. Touch the Go button below to open the Settings app.\n\n2. Touch Privacy.\n\n3. Turn the Camera on.\n\n4. Open this app and try again.";
@@ -180,7 +181,7 @@
 {
     if (alertView.tag == 3491832)
     {
-        BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
+        BOOL canOpenSettings = (UIApplicationOpenSettingsURLString != NULL);
         if (canOpenSettings)
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     }
@@ -210,12 +211,106 @@
                    config: ZBAR_CFG_ENABLE
                        to: 0];
     
-    productsArray = [[ITData getAllProducts] mutableCopy];
-    
     UIImage *cart = [UIImage imageNamed:@"shoppingCartIcon"];
+
     
     [self.cartButton setImage:[cart imageByScalingProportionallyToSize:CGSizeMake(74,64)] forState:UIControlStateNormal];
     
+    firstLoad = YES;
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (firstLoad) {
+        firstLoad = NO;
+        [self loadProducts];
+    }
+    
+}
+
+-(void)loadProducts {
+    
+        [self loadProductsWithCompletion:^ (BOOL success){
+            if (success) {
+                productsArray = [[ITData getAllProducts]mutableCopy];
+            } else {
+                
+                UIAlertController *failedAlert = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"We failed to retrieve the products. Check your connection please." preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *tryAgain = [UIAlertAction actionWithTitle:@"Try Again" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [self loadProducts];
+                }];
+                [failedAlert addAction:tryAgain];
+                [self presentViewController:failedAlert animated:true completion:nil];
+            }
+        }];
+    
+}
+
+-(void)loadProductsWithCompletion:(void (^)(BOOL))completion {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/products.csv", documentsDirectory];
+    
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *storageRef = [storage referenceForURL:@"gs://project-2924719563810163534.appspot.com/"];
+    FIRStorageReference *fileRef = [storageRef child:@"products.csv"];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] init];
+        indicator.translatesAutoresizingMaskIntoConstraints = NO;
+        indicator.color = [UIColor blackColor];
+        UIAlertController *activityAlert = [UIAlertController alertControllerWithTitle:@"Updating Products\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [activityAlert.view addSubview:indicator];
+        
+        NSDictionary *views = [[NSDictionary alloc] initWithObjects:[[NSArray alloc] initWithObjects:activityAlert.view,indicator, nil] forKeys:[[NSArray alloc] initWithObjects:@"pending", @"indicator", nil]];
+        NSMutableArray *constraints = [[NSMutableArray alloc]init];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[indicator]-(10)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[indicator]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+        [activityAlert.view addConstraints:constraints];
+        
+        indicator.userInteractionEnabled = NO;
+        [indicator startAnimating];
+        
+        [self presentViewController:activityAlert animated:true completion: ^{
+            
+            [fileRef writeToFile: [[NSURL alloc] initFileURLWithPath:filePath] completion: ^(NSURL *URL, NSError *error) {
+                [activityAlert dismissViewControllerAnimated:true completion:^ {
+                    completion(true);
+                }];
+            }];
+                
+        }];
+    } else {
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] init];
+        indicator.translatesAutoresizingMaskIntoConstraints = NO;
+        indicator.color = [UIColor blackColor];
+        UIAlertController *activityAlert = [UIAlertController alertControllerWithTitle:@"Downloading Products\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [activityAlert.view addSubview:indicator];
+        
+        NSDictionary *views = [[NSDictionary alloc] initWithObjects:[[NSArray alloc] initWithObjects:activityAlert.view,indicator, nil] forKeys:[[NSArray alloc] initWithObjects:@"pending", @"indicator", nil]];
+        NSMutableArray *constraints = [[NSMutableArray alloc]init];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[indicator]-(10)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[indicator]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
+        [activityAlert.view addConstraints:constraints];
+        
+        indicator.userInteractionEnabled = NO;
+        [indicator startAnimating];
+        
+        [self presentViewController:activityAlert animated:true completion: ^{
+            [fileRef writeToFile: [[NSURL alloc] initFileURLWithPath:filePath] completion: ^(NSURL *URL, NSError *error) {
+                [activityAlert dismissViewControllerAnimated:true completion:^ {
+                    if (error != nil) {
+                        completion(false);
+                        
+                    } else {
+                        completion(true);
+                        
+                    }
+                }];
+            }];
+        }];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {

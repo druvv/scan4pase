@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bnJ-CY-LYN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bnJ-CY-LYN">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -279,7 +279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-Yc-PdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="843" y="454"/>
+            <point key="canvasLocation" x="-379" y="552"/>
         </scene>
         <!--Items-->
         <scene sceneID="bIh-a2-GkG">
@@ -289,17 +289,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="xFD-b6-rZX">
-                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="aIJ-mI-Qhg" id="Fdz-Tp-59Q"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemCell" rowHeight="118" id="Byv-eZ-z2p" customClass="ItemTableViewCell" customModule="scan4PASE" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="130" width="320" height="118"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="118"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Byv-eZ-z2p" id="dRr-dg-eR2">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="117"/>
@@ -368,22 +360,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchDisplayController" destination="iV1-6a-Lka" id="naj-rP-vCX"/>
                         <segue destination="Nzm-6W-F1P" kind="modal" identifier="edit" id="iyX-2j-idg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPK-Nn-kxy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="iV1-6a-Lka">
-                    <connections>
-                        <outlet property="delegate" destination="aIJ-mI-Qhg" id="s0g-ji-Hzv"/>
-                        <outlet property="searchBar" destination="xFD-b6-rZX" id="3Q4-uF-8Ah"/>
-                        <outlet property="searchContentsController" destination="aIJ-mI-Qhg" id="XGx-F5-SQy"/>
-                        <outlet property="searchResultsDataSource" destination="aIJ-mI-Qhg" id="b8w-X2-5iA"/>
-                        <outlet property="searchResultsDelegate" destination="aIJ-mI-Qhg" id="dwZ-Wb-e2K"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="991" y="-138"/>
+            <point key="canvasLocation" x="47" y="564"/>
         </scene>
         <!--Edit Item View Controller-->
         <scene sceneID="g6Q-4Z-2Ft">
@@ -590,7 +572,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQU-ho-xls" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1426" y="-138"/>
+            <point key="canvasLocation" x="618" y="564"/>
         </scene>
         <!--Search-->
         <scene sceneID="MLr-Hw-mLl">
@@ -712,22 +694,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Search" id="7hv-ib-yCz"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="Au2-q4-Foa" id="U8J-of-JhZ"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0f4-Si-yn6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="Au2-q4-Foa">
-                    <connections>
-                        <outlet property="delegate" destination="85X-FF-YsM" id="gzs-03-NGw"/>
-                        <outlet property="searchBar" destination="5zZ-KO-WCg" id="28F-63-07v"/>
-                        <outlet property="searchContentsController" destination="85X-FF-YsM" id="JDT-0b-Z7o"/>
-                        <outlet property="searchResultsDataSource" destination="85X-FF-YsM" id="aXK-i5-owC"/>
-                        <outlet property="searchResultsDelegate" destination="85X-FF-YsM" id="s0c-7y-QWC"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="550" y="1022"/>
+            <point key="canvasLocation" x="532" y="-118"/>
         </scene>
         <!--Details-->
         <scene sceneID="j68-sb-bCh">
@@ -809,19 +779,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: For Discount Enter Fractional Quantity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="j8j-Oh-Gho">
-                                <rect key="frame" x="0.0" y="439" width="320" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.65790374090000003" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="j8j-Oh-Gho" secondAttribute="trailing" id="THI-Kx-FcL"/>
-                            <constraint firstItem="L5f-4S-CtF" firstAttribute="top" secondItem="j8j-Oh-Gho" secondAttribute="bottom" id="axH-Th-5bT"/>
-                            <constraint firstItem="j8j-Oh-Gho" firstAttribute="leading" secondItem="zQo-yd-dh3" secondAttribute="leading" id="gX8-kr-yXC"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="eeK-xL-zpc"/>
                     <connections>
@@ -834,7 +793,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dm8-d8-ZR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1144" y="1022"/>
+            <point key="canvasLocation" x="948" y="-126"/>
         </scene>
         <!--Result-->
         <scene sceneID="I6H-4g-1zG">
@@ -987,7 +946,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c53-3f-T05" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="2439"/>
+            <point key="canvasLocation" x="1358" y="-126"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="MKZ-c6-2SZ">
@@ -1267,7 +1226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bb5-lJ-hg1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="-1613"/>
+            <point key="canvasLocation" x="976" y="-685"/>
         </scene>
         <!--Cart-->
         <scene sceneID="HJx-9h-J0Z">
@@ -1462,7 +1421,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s0X-EG-3XC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="-813"/>
+            <point key="canvasLocation" x="325" y="-729"/>
         </scene>
         <!--Help-->
         <scene sceneID="iUL-Jh-8mb">
@@ -1503,7 +1462,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXW-dv-tdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="520"/>
+            <point key="canvasLocation" x="1298" y="552"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SpD-US-VBB">
@@ -1520,7 +1479,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXZ-jb-NIZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-664" y="-158"/>
+            <point key="canvasLocation" x="-564" y="-152"/>
         </scene>
     </scenes>
     <resources>
@@ -1533,6 +1492,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8hP-tx-Xe7"/>
+        <segue reference="nme-tp-DID"/>
     </inferredMetricsTieBreakers>
 </document>

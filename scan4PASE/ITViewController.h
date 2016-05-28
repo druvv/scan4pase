@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ZBarReaderViewController.h>
-#import <zbar.h>
+@import ZBarSDK;
 #import "ITInfoViewController.h"
 #import "ITTableViewController.h"
 #import "ITCheckoutController.h"
@@ -46,6 +45,8 @@
     
     UIImagePickerController *mainReader;
     int totalNumber;
+    
+    BOOL firstLoad;
     
 }
 

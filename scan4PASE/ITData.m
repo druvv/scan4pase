@@ -9,6 +9,7 @@
 
 #import "ITData.h"
 #include "math.h"
+@import FirebaseStorage;
 @implementation ITData
 @synthesize cartProducts, test, currentProduct;
 
@@ -28,18 +29,15 @@ static ITData *instance = nil;
 }
 
 +(NSArray *)getAllProducts {
-    // Start Core Data Vars and Initializatins
     ITAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
     NSMutableArray *allProducts = [[NSMutableArray alloc] init];
-    
-    // Copy Persistant to so called Scratch Pad
     NSManagedObjectContext *moc = [appDelegate managedObjectContext];
     
-    //Load CSV
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/products.csv", documentsDirectory];
+    
     NSError *error;
-    NSString *filename = @"amwayproducts-mar12-2016";
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:filename ofType:@"txt"];
     NSString *csvString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
     
     if (error) {
@@ -50,105 +48,77 @@ static ITData *instance = nil;
     NSArray *csvArray;
     csvArray = [csvString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     
-    // Delete current old version objects
-    NSFetchRequest *request3 = [[NSFetchRequest alloc] init];
-    [request3 setEntity:[NSEntityDescription entityForName:@"Product" inManagedObjectContext:moc]];
-    [request3 setPredicate:[NSPredicate predicateWithFormat:@"version != %@ AND custom != TRUE",filename]];
-    if ([moc executeFetchRequest:request3 error:nil].count != 0) {
-        [appDelegate resetCoreDataAndCustom:false];
-    }
+    // Delete all non-custom products
+    NSFetchRequest *deleteRequest = [[NSFetchRequest alloc] init];
+    [deleteRequest setEntity:[NSEntityDescription entityForName:@"Product" inManagedObjectContext:moc]];
+    [deleteRequest setPredicate:[NSPredicate predicateWithFormat:@"custom != TRUE"]];
+    NSBatchDeleteRequest *batchDeleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:deleteRequest];
+    [moc executeRequest:batchDeleteRequest error:nil];
     
-    // Get Current Stored Count
-    NSFetchRequest *request1 = [[NSFetchRequest alloc] init];
-    [request1 setEntity:[NSEntityDescription entityForName:@"Product" inManagedObjectContext:moc]];
-    [request1 setIncludesSubentities:NO];
-    int count = (int)[moc countForFetchRequest:request1 error:nil];
     // Get Only custom objects
     NSFetchRequest *request2 = [[NSFetchRequest alloc] init];
     [request2 setEntity:[NSEntityDescription entityForName:@"Product" inManagedObjectContext:moc]];
     [request2 setPredicate:[NSPredicate predicateWithFormat:@"custom == TRUE"]];
     NSArray *customObjects = [moc executeFetchRequest:request2 error:nil];
-    
-    
-    // If number of Current Stored Products is less than the Csv Array's
-    if (count < csvArray.count) {
-        
-        //Parse CSV
-        
-        // For Every product in csvArray
-        for (NSString * product in csvArray)
-        {
-            BOOL shouldSave = true;
-            NSArray *components = [product componentsSeparatedByString:@"*"];
+
+    for (NSString * product in csvArray) {
+        BOOL shouldSave = true;
+        NSArray *components = [product componentsSeparatedByString:@";"];
             
-            // Temporarilty Hold Objects from the csv
-            NSString *SKU   = components[0];
-            NSString *name  = components[1];
-            NSString *PV =  components[2];
-            NSString *BV = components[3];
-            NSString *IBOPrice = components[4];
-            NSString *RetailPrice = components[5];
-            bool taxable = false;
-            NSString *quantity = @"1";
-            NSDecimalNumber *salesTax = [NSDecimalNumber decimalNumberWithString:@"0"];
+        // Temporarilty Hold Objects from the csv
+        NSString *SKU   = components[0];
+        NSString *name  = components[1];
+        NSString *PV =  components[2];
+        NSString *BV = components[3];
+        NSString *IBOPrice = components[4];
+        NSString *RetailPrice = components[5];
+        bool taxable = false;
+        NSString *quantity = @"1";
+        NSDecimalNumber *salesTax = [NSDecimalNumber decimalNumberWithString:@"0"];
             
-            // Does it Match a Custom Object?
-            NSPredicate *pred = [NSPredicate predicateWithFormat:@"sku == %@",SKU];
-            if ([customObjects filteredArrayUsingPredicate:pred].count != 0) {
-                shouldSave = false;
-            }
-            
-            if (shouldSave) {
-                
-                // Convert Strings to NSDecimalNumbers to pass to id as a decimal type.
-                NSDecimalNumber *pvNumber = [NSDecimalNumber decimalNumberWithString:PV];
-                NSDecimalNumber *bvNumber = [NSDecimalNumber decimalNumberWithString:BV];
-                NSDecimalNumber *iboCostNumber = [NSDecimalNumber decimalNumberWithString:IBOPrice];
-                NSDecimalNumber *retailCostNumber = [NSDecimalNumber decimalNumberWithString:RetailPrice];
-                // Bool requires the NSnumber class
-                NSNumber *taxableNumber = [NSNumber numberWithBool:taxable];
-                
-                // Create the Product
-                NSManagedObject *product = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:moc];
-                
-                
-    
-                
-                // Always not custom!
-                NSNumber *num = [NSNumber numberWithBool:false];
-                // Version Number for Updating Products
-                NSString *version = filename;
-                // Set the values for the products.
-                [product setValue:SKU forKey:@"sku"];
-                [product setValue:name forKey:@"name"];
-                [product setValue:pvNumber forKey:@"pv"];
-                [product setValue:bvNumber forKey:@"bv"];
-                [product setValue:iboCostNumber forKey:@"iboCost"];
-                [product setValue:retailCostNumber forKey:@"retailCost"];
-                [product setValue:quantity forKey:@"quantity"];
-                [product setValue:salesTax forKey:@"salesTax"];
-                [product setValue:taxableNumber forKey:@"taxable"];
-                [product setValue:num forKey:@"custom"];
-                [product setValue:version forKey:@"version"];
-                
-                // If we fail to save then abort and report error
-                
-            } // EXIT SHOULD SAVE
-            
-        } // EXIT FOR LOOP
-        NSError *err;
-        if (![moc save:&err]) {
-            NSLog(@"Failed to save product: %@",err);
-           
+        // Does the sku Match a Custom Object?
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"sku == %@",SKU];
+        if ([customObjects filteredArrayUsingPredicate:pred].count != 0) {
+            shouldSave = false;
         }
-        
-        
-        allProducts = [self getProductsFromContext];
-        
-        
-    } else {
-        allProducts = [self getProductsFromContext];
+            
+        if (shouldSave) {
+                
+            // Convert Strings to NSDecimalNumbers to pass to id as a decimal type.
+            NSDecimalNumber *pvNumber = [NSDecimalNumber decimalNumberWithString:PV];
+            NSDecimalNumber *bvNumber = [NSDecimalNumber decimalNumberWithString:BV];
+            NSDecimalNumber *iboCostNumber = [NSDecimalNumber decimalNumberWithString:IBOPrice];
+            NSDecimalNumber *retailCostNumber = [NSDecimalNumber decimalNumberWithString:RetailPrice];
+            // Bool requires the NSnumber class
+            NSNumber *taxableNumber = [NSNumber numberWithBool:taxable];
+                
+            // Create the Product
+            NSManagedObject *product = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:moc];
+                
+            // Always not custom!
+            NSNumber *num = [NSNumber numberWithBool:false];
+            // Set the values for the products.
+            [product setValue:SKU forKey:@"sku"];
+            [product setValue:name forKey:@"name"];
+            [product setValue:pvNumber forKey:@"pv"];
+            [product setValue:bvNumber forKey:@"bv"];
+            [product setValue:iboCostNumber forKey:@"iboCost"];
+            [product setValue:retailCostNumber forKey:@"retailCost"];
+            [product setValue:quantity forKey:@"quantity"];
+            [product setValue:salesTax forKey:@"salesTax"];
+            [product setValue:taxableNumber forKey:@"taxable"];
+            [product setValue:num forKey:@"custom"];
+                
+        } // EXIT SHOULD SAVE
+            
+    } // EXIT FOR LOOP
+    NSError *err;
+    if (![moc save:&err]) {
+        NSLog(@"Failed to save product: %@",err);
+           
     }
+        
+    allProducts = [self getProductsFromContext];
     
     return allProducts;
 }

@@ -41,7 +41,6 @@
 		FCA03A681AB7A07300586D4E /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA03A671AB7A07300586D4E /* ItemTableViewController.swift */; };
 		FCA03A6C1AB7A18200586D4E /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA03A6B1AB7A18200586D4E /* ItemTableViewCell.swift */; };
 		FCA03A6E1AB7A26500586D4E /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA03A6D1AB7A26500586D4E /* EditItemViewController.swift */; };
-		FCAECCA41C94D90700B9ADE8 /* amwayproducts-mar12-2016.txt in Resources */ = {isa = PBXBuildFile; fileRef = FCAECCA31C94D90700B9ADE8 /* amwayproducts-mar12-2016.txt */; };
 		FCB7AF141809E8E200F01780 /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB7AF0A1809E8E200F01780 /* AppIcon29x29.png */; };
 		FCB7AF161809E8E200F01780 /* AppIcon40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB7AF0C1809E8E200F01780 /* AppIcon40x40.png */; };
 		FCB7AF171809E8E200F01780 /* AppIcon40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB7AF0D1809E8E200F01780 /* AppIcon40x40@2x.png */; };
@@ -113,7 +112,6 @@
 		FCA03A671AB7A07300586D4E /* ItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		FCA03A6B1AB7A18200586D4E /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemTableViewCell.swift; path = ../ItemTableViewCell.swift; sourceTree = "<group>"; };
 		FCA03A6D1AB7A26500586D4E /* EditItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
-		FCAECCA31C94D90700B9ADE8 /* amwayproducts-mar12-2016.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "amwayproducts-mar12-2016.txt"; sourceTree = "<group>"; };
 		FCB7AF0A1809E8E200F01780 /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
 		FCB7AF0C1809E8E200F01780 /* AppIcon40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon40x40.png; sourceTree = "<group>"; };
 		FCB7AF0D1809E8E200F01780 /* AppIcon40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@2x.png"; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 		FC7D8F4417CA443A002C672A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FCAECCA31C94D90700B9ADE8 /* amwayproducts-mar12-2016.txt */,
 				FC3FE23F1974333900A93B97 /* scan4PASE-info.plist */,
 				FCF30B241CF7DA0600055F7C /* GoogleService-Info.plist */,
 				FC56DCE2193BAC0100A18E27 /* Default-568h@2x.png */,
@@ -382,7 +379,6 @@
 				FCB7AF1D1809E8E200F01780 /* iTunesArtwork@2x.png in Resources */,
 				FCB7AF141809E8E200F01780 /* AppIcon29x29.png in Resources */,
 				FCB7AF1B1809E8E200F01780 /* AppIcon76x76@2x.png in Resources */,
-				FCAECCA41C94D90700B9ADE8 /* amwayproducts-mar12-2016.txt in Resources */,
 				FC7D8F4817CA443A002C672A /* InfoPlist.strings in Resources */,
 				FCB7AF191809E8E200F01780 /* AppIcon60x60@2x.png in Resources */,
 				FCF30B251CF7DA0600055F7C /* GoogleService-Info.plist in Resources */,
@@ -617,6 +613,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "scan4pase/scan4pase-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -651,6 +648,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "scan4pase/scan4pase-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};

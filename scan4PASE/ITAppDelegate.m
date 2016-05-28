@@ -29,10 +29,49 @@
     [defaults registerDefaults:appDefaults];
     [defaults synchronize];
     
+    [self registerForPushNotificationsWithApplication:application];
+    
     // Add Firebase
     [FIRApp configure];
     
+    
+    
     return YES;
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
+    if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
+    {
+        //opened from a push notification when the app was on background
+    } else {
+        
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        notification.alertTitle = userInfo[@"aps"][@"alert"];
+        [application presentLocalNotificationNow:notification];
+
+    }
+}
+
+-(void)registerForPushNotificationsWithApplication:(UIApplication *)application {
+    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes: (UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
+    [application registerUserNotificationSettings:notificationSettings];
+}
+
+-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    if (notificationSettings.types != UIUserNotificationTypeNone) {
+        [application registerForRemoteNotifications];
+    }
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    const unsigned *tokenBytes = [deviceToken bytes];
+    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    
+    [[FIRInstanceID instanceID] setAPNSToken:deviceToken type:FIRInstanceIDAPNSTokenTypeUnknown];
+    NSLog(@"Device Token: %@", hexToken);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

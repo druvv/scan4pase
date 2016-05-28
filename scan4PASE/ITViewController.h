@@ -46,6 +46,8 @@
     UIImagePickerController *mainReader;
     int totalNumber;
     
+    BOOL firstLoad;
+    
 }
 
 -(IBAction)scanButtonPressed:(id)sender;

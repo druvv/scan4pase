@@ -9,5 +9,7 @@ target 'scan4PASE' do
   pod 'ZBarSDK'
   pod 'Firebase/Core'
   pod 'Firebase/Crash'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
 
 end

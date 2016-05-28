@@ -215,40 +215,14 @@
 		FC7D8F4317CA443A002C672A /* scan4PASE */ = {
 			isa = PBXGroup;
 			children = (
-				FCF99F8817F71EC800EF9DED /* ITCheckoutController.h */,
-				FCF99F8917F71EC800EF9DED /* ITCheckoutController.m */,
-				FCF99F8B17F722D300EF9DED /* ITCheckoutCell.h */,
-				FCF99F8C17F722D300EF9DED /* ITCheckoutCell.m */,
-				FC7D8F4C17CA443A002C672A /* ITAppDelegate.h */,
-				FC7D8F4D17CA443A002C672A /* ITAppDelegate.m */,
-				FC7B11121AB5EEE1005A3BF6 /* model.xcdatamodeld */,
+				FCA1B79C1CF95EC00007BBCD /* DataModel */,
+				FCA1B79A1CF95E9A0007BBCD /* ViewControllers */,
+				FCA1B79B1CF95EA90007BBCD /* TableViewCells */,
 				FC7D8F4F17CA443A002C672A /* Main.storyboard */,
-				FC36E2AF1AD053920016094D /* SettingsViewController.swift */,
-				FCA03A6D1AB7A26500586D4E /* EditItemViewController.swift */,
-				FCA03A6B1AB7A18200586D4E /* ItemTableViewCell.swift */,
-				FCA03A671AB7A07300586D4E /* ItemTableViewController.swift */,
-				FC56DCD6193B8E0F00A18E27 /* ITSearchPopUp.h */,
-				FC56DCD7193B8E0F00A18E27 /* ITSearchPopUp.m */,
-				FC56DCD9193B8E2300A18E27 /* ITSearchPopupCell.h */,
-				FC56DCDA193B8E2300A18E27 /* ITSearchPopupCell.m */,
-				FC7D8F5217CA443A002C672A /* ITViewController.h */,
-				FC7D8F5317CA443A002C672A /* ITViewController.m */,
-				FC105F2A182AEB350020B7AF /* ITData.h */,
-				FC105F2B182AEB350020B7AF /* ITData.m */,
-				FC7D8F7717CA4466002C672A /* ITInfoViewController.h */,
-				FC7D8F7817CA4466002C672A /* ITInfoViewController.m */,
-				FCD65E8117CD002C0071F11A /* ITCell.h */,
-				FCD65E8217CD002C0071F11A /* ITCell.m */,
-				FC8127541831B63700331BEE /* ITScanDetails.h */,
-				FC8127551831B63700331BEE /* ITScanDetails.m */,
-				FCD65E8417CD004A0071F11A /* ITTableViewController.h */,
-				FCD65E8517CD004A0071F11A /* ITTableViewController.m */,
-				FC105F2D182B16A90020B7AF /* ITHelp.h */,
-				FC105F2E182B16A90020B7AF /* ITHelp.m */,
-				FC27E9041ACF1A7200BAB344 /* Categories */,
 				FC7D8F5517CA443A002C672A /* Images.xcassets */,
-				FC7D8F4417CA443A002C672A /* Supporting Files */,
 				FCF30B271CF7DC9000055F7C /* scan4pase-Bridging-Header.h */,
+				FC7D8F4417CA443A002C672A /* Supporting Files */,
+				FC27E9041ACF1A7200BAB344 /* Categories */,
 			);
 			path = scan4PASE;
 			sourceTree = "<group>";
@@ -297,6 +271,56 @@
 				FC7D8F6517CA443A002C672A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCA1B79A1CF95E9A0007BBCD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FCF99F8817F71EC800EF9DED /* ITCheckoutController.h */,
+				FCF99F8917F71EC800EF9DED /* ITCheckoutController.m */,
+				FC7D8F4C17CA443A002C672A /* ITAppDelegate.h */,
+				FC7D8F4D17CA443A002C672A /* ITAppDelegate.m */,
+				FC36E2AF1AD053920016094D /* SettingsViewController.swift */,
+				FCA03A6D1AB7A26500586D4E /* EditItemViewController.swift */,
+				FCA03A6B1AB7A18200586D4E /* ItemTableViewCell.swift */,
+				FCA03A671AB7A07300586D4E /* ItemTableViewController.swift */,
+				FC56DCD6193B8E0F00A18E27 /* ITSearchPopUp.h */,
+				FC56DCD7193B8E0F00A18E27 /* ITSearchPopUp.m */,
+				FC7D8F5217CA443A002C672A /* ITViewController.h */,
+				FC7D8F5317CA443A002C672A /* ITViewController.m */,
+				FC7D8F7717CA4466002C672A /* ITInfoViewController.h */,
+				FC7D8F7817CA4466002C672A /* ITInfoViewController.m */,
+				FC8127541831B63700331BEE /* ITScanDetails.h */,
+				FC8127551831B63700331BEE /* ITScanDetails.m */,
+				FCD65E8417CD004A0071F11A /* ITTableViewController.h */,
+				FCD65E8517CD004A0071F11A /* ITTableViewController.m */,
+				FC105F2D182B16A90020B7AF /* ITHelp.h */,
+				FC105F2E182B16A90020B7AF /* ITHelp.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FCA1B79B1CF95EA90007BBCD /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				FCF99F8B17F722D300EF9DED /* ITCheckoutCell.h */,
+				FCF99F8C17F722D300EF9DED /* ITCheckoutCell.m */,
+				FC56DCD9193B8E2300A18E27 /* ITSearchPopupCell.h */,
+				FC56DCDA193B8E2300A18E27 /* ITSearchPopupCell.m */,
+				FCD65E8117CD002C0071F11A /* ITCell.h */,
+				FCD65E8217CD002C0071F11A /* ITCell.m */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		FCA1B79C1CF95EC00007BBCD /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				FC7B11121AB5EEE1005A3BF6 /* model.xcdatamodeld */,
+				FC105F2A182AEB350020B7AF /* ITData.h */,
+				FC105F2B182AEB350020B7AF /* ITData.m */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -570,7 +594,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -604,7 +628,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

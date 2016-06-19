@@ -42,6 +42,7 @@
     self.tableView.tableHeaderView = _searchController.searchBar;
     self.definesPresentationContext = YES;
     
+    
     mainData = [ITData getInstance];
     
     mainData.currentProduct = nil;
@@ -49,6 +50,10 @@
     allProducts = [[ITData getAllProducts] mutableCopy];
     
     
+}
+
+-(void)viewDidLayoutSubviews {
+    [_searchController.searchBar sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning

@@ -20,13 +20,7 @@ class ItemTableViewController: UITableViewController, UISearchControllerDelegate
 	var showCustom: Bool = false
 	var first = true
 
-	lazy var searchController: UISearchController = {
-		let controller = UISearchController(searchResultsController: nil)
-		controller.searchResultsUpdater = self
-		controller.dimsBackgroundDuringPresentation = false
-		controller.delegate = self
-		return controller
-	}()
+	let searchController: UISearchController = UISearchController(searchResultsController: nil)
 
 	// Load Existing Products into Array
 
@@ -37,21 +31,16 @@ class ItemTableViewController: UITableViewController, UISearchControllerDelegate
         
         let gesture = UIGestureRecognizer(target: self, action: #selector(resignFirstResponder))
         view.addGestureRecognizer(gesture)
-
-		// Uncomment the following line to preserve selection between presentations
-		// self.clearsSelectionOnViewWillAppear = false
-
-		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		// self.navigationItem.rightBarButtonItem = self.editButtonItem()
+       
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.searchBar.scopeButtonTitles = []
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
 	}
 
 	override func viewWillAppear(animated: Bool) {
-        tableView.tableHeaderView = searchController.searchBar
-        searchController.searchBar.delegate = self
-        searchController.searchBar.sizeToFit()
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.searchBarStyle = .Default
-        definesPresentationContext = true
         
 		products = NSMutableArray(array: ITData.getAllProducts())
 
@@ -60,6 +49,10 @@ class ItemTableViewController: UITableViewController, UISearchControllerDelegate
 		products.removeObjectsInArray(customProducts as [AnyObject])
 		tableView.reloadData()
 	}
+    
+    override func viewDidLayoutSubviews() {
+        searchController.searchBar.sizeToFit()
+    }
 
 	@IBAction func addObject(sender: AnyObject) {
 		edit = false

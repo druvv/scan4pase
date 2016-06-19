@@ -49,11 +49,15 @@ static ITData *instance = nil;
     csvArray = [csvString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     
     // Delete all non-custom products
-    NSFetchRequest *deleteRequest = [[NSFetchRequest alloc] init];
-    [deleteRequest setEntity:[NSEntityDescription entityForName:@"Product" inManagedObjectContext:moc]];
-    [deleteRequest setPredicate:[NSPredicate predicateWithFormat:@"custom != TRUE"]];
-    NSBatchDeleteRequest *batchDeleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:deleteRequest];
-    [moc executeRequest:batchDeleteRequest error:nil];
+    NSFetchRequest *oldProducts = [[NSFetchRequest alloc] init];
+    [oldProducts setEntity:[NSEntityDescription entityForName:@"Product" inManagedObjectContext:moc]];
+    [oldProducts setPredicate:[NSPredicate predicateWithFormat:@"custom != TRUE"]];
+    [oldProducts setIncludesPropertyValues:NO];
+    NSArray *productsToBeDeleted = [moc executeFetchRequest:oldProducts error:nil];
+    for (NSManagedObject *product in productsToBeDeleted) {
+        [moc deleteObject:product];
+    }
+    [appDelegate saveContext];
     
     // Get Only custom objects
     NSFetchRequest *request2 = [[NSFetchRequest alloc] init];
@@ -110,13 +114,8 @@ static ITData *instance = nil;
             [product setValue:num forKey:@"custom"];
                 
         } // EXIT SHOULD SAVE
-            
     } // EXIT FOR LOOP
-    NSError *err;
-    if (![moc save:&err]) {
-        NSLog(@"Failed to save product: %@",err);
-           
-    }
+    [appDelegate saveContext];
         
     allProducts = [self getProductsFromContext];
     

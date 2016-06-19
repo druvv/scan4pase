@@ -1,28 +1,28 @@
 PODS:
-  - Firebase/Analytics (3.2.0):
+  - Firebase/Analytics (3.2.1):
     - FirebaseAnalytics (= 3.2.0)
-  - Firebase/Core (3.2.0):
-    - Firebase/Analytics (= 3.2.0)
-  - Firebase/Crash (3.2.0):
-    - Firebase/Analytics (= 3.2.0)
-    - FirebaseCrash (= 1.0.4)
-  - Firebase/Messaging (3.2.0):
-    - Firebase/Analytics (= 3.2.0)
+  - Firebase/Core (3.2.1):
+    - Firebase/Analytics (= 3.2.1)
+  - Firebase/Crash (3.2.1):
+    - Firebase/Analytics (= 3.2.1)
+    - FirebaseCrash (= 1.0.6)
+  - Firebase/Messaging (3.2.1):
+    - Firebase/Analytics (= 3.2.1)
     - FirebaseMessaging (= 1.1.0)
-  - Firebase/Storage (3.2.0):
-    - Firebase/Analytics (= 3.2.0)
+  - Firebase/Storage (3.2.1):
+    - Firebase/Analytics (= 3.2.1)
     - FirebaseStorage (= 1.0.1)
   - FirebaseAnalytics (3.2.0):
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleUtilities (~> 1.3)
-  - FirebaseCrash (1.0.4):
-    - FirebaseAnalytics (~> 3.2)
+  - FirebaseCrash (1.0.6):
+    - FirebaseAnalytics (~> 3.0)
     - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
-    - GoogleUtilities (~> 1.3)
+    - GoogleInterchangeUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
   - FirebaseInstanceID (1.0.6)
   - FirebaseMessaging (1.1.0):
     - FirebaseAnalytics (~> 3.2)
@@ -52,9 +52,9 @@ DEPENDENCIES:
   - ZBarSDK
 
 SPEC CHECKSUMS:
-  Firebase: 6d4012da1598732a2b43f16d8355eca90f94ed59
+  Firebase: 6c80ac28d59d06bfd9152a7b6ea17625ca93183d
   FirebaseAnalytics: 6f75b04e6bfb8e0b6e9ef298e04c24eea3b13863
-  FirebaseCrash: e3bff070dca75f71e10e4295b18642f77f6d87c9
+  FirebaseCrash: 899d0abc23b411d01087094e3da24527eaecabf7
   FirebaseInstanceID: d014d574053a2fe84478f12f7bae96979e7051bb
   FirebaseMessaging: 8a92e9ea70673605aa7d1803d2d5aa3eb946009c
   FirebaseStorage: e9c32a8d246c07eeefd78180c22736aa1b81e81b

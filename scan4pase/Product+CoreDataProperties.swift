@@ -18,8 +18,9 @@ extension Product {
     @NSManaged var sku: String?
     @NSManaged var pv: NSDecimalNumber?
     @NSManaged var bv: NSDecimalNumber?
-    @NSManaged var iboPrice: NSDecimalNumber?
-    @NSManaged var retailPrice: NSDecimalNumber?
-    @NSManaged var cartProduct: NSManagedObject?
+    @NSManaged var iboCost: NSDecimalNumber?
+    @NSManaged var retailCost: NSDecimalNumber?
+    @NSManaged var custom: NSNumber?
+    @NSManaged var cartProduct: CartProduct?
 
 }

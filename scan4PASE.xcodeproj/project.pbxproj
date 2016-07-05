@@ -8,8 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		94366AFF32DE82ABC560B305 /* Pods_scan4pase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F3668285BBC16387BC43ED /* Pods_scan4pase.framework */; };
+		FC1F38331D2C1D9A001CDF96 /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F38321D2C1D9A001CDF96 /* CartVC.swift */; };
+		FC1F38351D2C1DAF001CDF96 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F38341D2C1DAF001CDF96 /* ProductService.swift */; };
+		FC1F383B1D2C1E75001CDF96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC1F383A1D2C1E75001CDF96 /* GoogleService-Info.plist */; };
+		FC1F383F1D2C37C4001CDF96 /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F383E1D2C37C4001CDF96 /* CartCell.swift */; };
+		FC1F38411D2C37D8001CDF96 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F38401D2C37D8001CDF96 /* ProductCell.swift */; };
+		FC1F38451D2C3853001CDF96 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F38441D2C3853001CDF96 /* SearchVC.swift */; };
+		FC1F38471D2C477C001CDF96 /* DSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F38461D2C477C001CDF96 /* DSHelper.swift */; };
 		FC2CA05F1D2B4D4900839E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CA05E1D2B4D4900839E4E /* AppDelegate.swift */; };
-		FC2CA0611D2B4D4900839E4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2CA0601D2B4D4900839E4E /* ViewController.swift */; };
 		FC2CA0641D2B4D4900839E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2CA0621D2B4D4900839E4E /* Main.storyboard */; };
 		FC2CA0661D2B4D4900839E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2CA0651D2B4D4900839E4E /* Assets.xcassets */; };
 		FC2CA0691D2B4D4900839E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2CA0671D2B4D4900839E4E /* LaunchScreen.storyboard */; };
@@ -26,9 +32,15 @@
 		20F3668285BBC16387BC43ED /* Pods_scan4pase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_scan4pase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7F9060A460BED11A3B9D49 /* Pods-scan4pase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4pase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scan4pase/Pods-scan4pase.debug.xcconfig"; sourceTree = "<group>"; };
 		E07C9F6564252996406F30DD /* Pods-scan4pase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4pase.release.xcconfig"; path = "Pods/Target Support Files/Pods-scan4pase/Pods-scan4pase.release.xcconfig"; sourceTree = "<group>"; };
+		FC1F38321D2C1D9A001CDF96 /* CartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
+		FC1F38341D2C1DAF001CDF96 /* ProductService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
+		FC1F383A1D2C1E75001CDF96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FC1F383E1D2C37C4001CDF96 /* CartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
+		FC1F38401D2C37D8001CDF96 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		FC1F38441D2C3853001CDF96 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		FC1F38461D2C477C001CDF96 /* DSHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSHelper.swift; sourceTree = "<group>"; };
 		FC2CA05B1D2B4D4900839E4E /* scan4pase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scan4pase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2CA05E1D2B4D4900839E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FC2CA0601D2B4D4900839E4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FC2CA0631D2B4D4900839E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC2CA0651D2B4D4900839E4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC2CA0681D2B4D4900839E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,12 +105,18 @@
 			isa = PBXGroup;
 			children = (
 				FC2CA05E1D2B4D4900839E4E /* AppDelegate.swift */,
-				FC2CA0601D2B4D4900839E4E /* ViewController.swift */,
+				FC1F38441D2C3853001CDF96 /* SearchVC.swift */,
+				FC1F38321D2C1D9A001CDF96 /* CartVC.swift */,
+				FC1F38341D2C1DAF001CDF96 /* ProductService.swift */,
+				FC1F383E1D2C37C4001CDF96 /* CartCell.swift */,
+				FC1F38401D2C37D8001CDF96 /* ProductCell.swift */,
 				FC2CA0621D2B4D4900839E4E /* Main.storyboard */,
+				FC1F38461D2C477C001CDF96 /* DSHelper.swift */,
 				FC4F38E71D2B8BA200751ADC /* Core Data */,
 				FC2CA0651D2B4D4900839E4E /* Assets.xcassets */,
 				FC2CA0671D2B4D4900839E4E /* LaunchScreen.storyboard */,
 				FC2CA06A1D2B4D4900839E4E /* Info.plist */,
+				FC1F383A1D2C1E75001CDF96 /* GoogleService-Info.plist */,
 			);
 			path = scan4pase;
 			sourceTree = "<group>";
@@ -124,8 +142,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC2CA06D1D2B4D4900839E4E /* Build configuration list for PBXNativeTarget "scan4pase" */;
 			buildPhases = (
-				FC2CA0701D2B7DBB00839E4E /* Set Build Number */,
 				8CFA74C9490547744F7ACCC8 /* [CP] Check Pods Manifest.lock */,
+				FC2CA0701D2B7DBB00839E4E /* Set Build Number */,
 				FC2CA0571D2B4D4900839E4E /* Sources */,
 				FC2CA0581D2B4D4900839E4E /* Frameworks */,
 				FC2CA0591D2B4D4900839E4E /* Resources */,
@@ -182,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC2CA0691D2B4D4900839E4E /* LaunchScreen.storyboard in Resources */,
+				FC1F383B1D2C1E75001CDF96 /* GoogleService-Info.plist in Resources */,
 				FC2CA0661D2B4D4900839E4E /* Assets.xcassets in Resources */,
 				FC2CA0641D2B4D4900839E4E /* Main.storyboard in Resources */,
 			);
@@ -270,15 +289,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC2CA0611D2B4D4900839E4E /* ViewController.swift in Sources */,
+				FC1F38471D2C477C001CDF96 /* DSHelper.swift in Sources */,
 				FC2CA05F1D2B4D4900839E4E /* AppDelegate.swift in Sources */,
 				FC4F38E21D2B8B9700751ADC /* Product.swift in Sources */,
 				FC4F38E61D2B8B9700751ADC /* CartProduct.swift in Sources */,
 				FC4F38E41D2B8B9700751ADC /* Cart.swift in Sources */,
+				FC1F383F1D2C37C4001CDF96 /* CartCell.swift in Sources */,
 				FC4F38E11D2B8B9700751ADC /* Product+CoreDataProperties.swift in Sources */,
+				FC1F38331D2C1D9A001CDF96 /* CartVC.swift in Sources */,
 				FC4F38E51D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift in Sources */,
 				FC4F38DA1D2B89B600751ADC /* Model.xcdatamodeld in Sources */,
+				FC1F38411D2C37D8001CDF96 /* ProductCell.swift in Sources */,
+				FC1F38451D2C3853001CDF96 /* SearchVC.swift in Sources */,
 				FC4F38E31D2B8B9700751ADC /* Cart+CoreDataProperties.swift in Sources */,
+				FC1F38351D2C1DAF001CDF96 /* ProductService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

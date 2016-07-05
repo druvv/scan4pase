@@ -8,4 +8,9 @@ target 'scan4pase' do
   # Pods for scan4pase
   pod 'ActionSheetPicker-3.0'
   pod 'MagicalRecord'
+  pod 'Firebase'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Crash'
+  pod 'Firebase/Messaging'
+  pod 'Alamofire'
 end

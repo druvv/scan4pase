@@ -8,6 +8,7 @@
 
 import UIKit
 import MagicalRecord
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,10 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        
         // Start the Magic
         MagicalRecord.setLoggingLevel(.Warn)
         MagicalRecord.setupAutoMigratingCoreDataStack()
+        FIRApp.configure()
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.grayColor()], forState: .Normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 38, green: 184, blue: 151)], forState: .Selected)
+        
+        
         return true
     }
 

@@ -5,21 +5,23 @@
     </entity>
     <entity name="CartProduct" representedClassName=".CartProduct" syncable="YES">
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="taxable" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="cart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cart" inverseName="products" inverseEntity="Cart" syncable="YES"/>
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="cartProduct" inverseEntity="Product" syncable="YES"/>
     </entity>
     <entity name="Product" representedClassName=".Product" syncable="YES">
         <attribute name="bv" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="iboPrice" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="custom" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="iboCost" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pv" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="retailPrice" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="retailCost" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="sku" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="cartProduct" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CartProduct" inverseName="product" inverseEntity="CartProduct" syncable="YES"/>
     </entity>
     <elements>
         <element name="Cart" positionX="-443" positionY="-564" width="128" height="58"/>
-        <element name="Product" positionX="-432" positionY="-297" width="128" height="148"/>
-        <element name="CartProduct" positionX="-441" positionY="-450" width="128" height="88"/>
+        <element name="CartProduct" positionX="-441" positionY="-450" width="128" height="105"/>
+        <element name="Product" positionX="-432" positionY="-297" width="128" height="165"/>
     </elements>
 </model>

@@ -16,6 +16,7 @@ extension CartProduct {
 
     @NSManaged var quantity: NSNumber?
     @NSManaged var product: Product?
+    @NSManaged var taxable: NSNumber?
     @NSManaged var cart: Cart?
 
 }

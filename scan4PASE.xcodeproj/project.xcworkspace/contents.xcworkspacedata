@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:scan4PASE.xcodeproj">
+      location = "self:scan4pase.xcodeproj">
    </FileRef>
 </Workspace>

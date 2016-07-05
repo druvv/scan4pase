@@ -13,6 +13,13 @@
 		FC2CA0641D2B4D4900839E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2CA0621D2B4D4900839E4E /* Main.storyboard */; };
 		FC2CA0661D2B4D4900839E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2CA0651D2B4D4900839E4E /* Assets.xcassets */; };
 		FC2CA0691D2B4D4900839E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2CA0671D2B4D4900839E4E /* LaunchScreen.storyboard */; };
+		FC4F38DA1D2B89B600751ADC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38D81D2B89B600751ADC /* Model.xcdatamodeld */; };
+		FC4F38E11D2B8B9700751ADC /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DB1D2B8B9700751ADC /* Product+CoreDataProperties.swift */; };
+		FC4F38E21D2B8B9700751ADC /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DC1D2B8B9700751ADC /* Product.swift */; };
+		FC4F38E31D2B8B9700751ADC /* Cart+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DD1D2B8B9700751ADC /* Cart+CoreDataProperties.swift */; };
+		FC4F38E41D2B8B9700751ADC /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DE1D2B8B9700751ADC /* Cart.swift */; };
+		FC4F38E51D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DF1D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift */; };
+		FC4F38E61D2B8B9700751ADC /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38E01D2B8B9700751ADC /* CartProduct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,13 @@
 		FC2CA0651D2B4D4900839E4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC2CA0681D2B4D4900839E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC2CA06A1D2B4D4900839E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC4F38D91D2B89B600751ADC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		FC4F38DB1D2B8B9700751ADC /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC4F38DC1D2B8B9700751ADC /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		FC4F38DD1D2B8B9700751ADC /* Cart+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cart+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC4F38DE1D2B8B9700751ADC /* Cart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		FC4F38DF1D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CartProduct+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC4F38E01D2B8B9700751ADC /* CartProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +95,26 @@
 				FC2CA05E1D2B4D4900839E4E /* AppDelegate.swift */,
 				FC2CA0601D2B4D4900839E4E /* ViewController.swift */,
 				FC2CA0621D2B4D4900839E4E /* Main.storyboard */,
+				FC4F38E71D2B8BA200751ADC /* Core Data */,
 				FC2CA0651D2B4D4900839E4E /* Assets.xcassets */,
 				FC2CA0671D2B4D4900839E4E /* LaunchScreen.storyboard */,
 				FC2CA06A1D2B4D4900839E4E /* Info.plist */,
 			);
 			path = scan4pase;
+			sourceTree = "<group>";
+		};
+		FC4F38E71D2B8BA200751ADC /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				FC4F38D81D2B89B600751ADC /* Model.xcdatamodeld */,
+				FC4F38DB1D2B8B9700751ADC /* Product+CoreDataProperties.swift */,
+				FC4F38DC1D2B8B9700751ADC /* Product.swift */,
+				FC4F38DD1D2B8B9700751ADC /* Cart+CoreDataProperties.swift */,
+				FC4F38DE1D2B8B9700751ADC /* Cart.swift */,
+				FC4F38DF1D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift */,
+				FC4F38E01D2B8B9700751ADC /* CartProduct.swift */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,14 +124,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC2CA06D1D2B4D4900839E4E /* Build configuration list for PBXNativeTarget "scan4pase" */;
 			buildPhases = (
-				8CFA74C9490547744F7ACCC8 /* [CP] Check Pods Manifest.lock */,
 				FC2CA0701D2B7DBB00839E4E /* Set Build Number */,
+				8CFA74C9490547744F7ACCC8 /* [CP] Check Pods Manifest.lock */,
 				FC2CA0571D2B4D4900839E4E /* Sources */,
 				FC2CA0581D2B4D4900839E4E /* Frameworks */,
 				FC2CA0591D2B4D4900839E4E /* Resources */,
 				F93D1BA2EF80D7EF6C1314D9 /* [CP] Embed Pods Frameworks */,
 				368F0FBE88FC510C2BCC1B3E /* [CP] Copy Pods Resources */,
-				FC2CA0711D2B7DE500839E4E /* Set Build Number */,
+				FC2CA0711D2B7DE500839E4E /* Set Build Number to Development */,
 			);
 			buildRules = (
 			);
@@ -218,21 +247,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(git rev-list HEAD | wc -l | tr -d ' ')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "#!/bin/bash\n# Set the build number to the count of Git commits\nbuildNumber=$(git rev-list HEAD | wc -l | tr -d ' ')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
-		FC2CA0711D2B7DE500839E4E /* Set Build Number */ = {
+		FC2CA0711D2B7DE500839E4E /* Set Build Number to Development */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Set Build Number";
+			name = "Set Build Number to Development";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion DEVELOPMENT\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "#!/bin/bash\n# Set the build number to \"DEVELOPMENT\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion DEVELOPMENT\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -243,6 +272,13 @@
 			files = (
 				FC2CA0611D2B4D4900839E4E /* ViewController.swift in Sources */,
 				FC2CA05F1D2B4D4900839E4E /* AppDelegate.swift in Sources */,
+				FC4F38E21D2B8B9700751ADC /* Product.swift in Sources */,
+				FC4F38E61D2B8B9700751ADC /* CartProduct.swift in Sources */,
+				FC4F38E41D2B8B9700751ADC /* Cart.swift in Sources */,
+				FC4F38E11D2B8B9700751ADC /* Product+CoreDataProperties.swift in Sources */,
+				FC4F38E51D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift in Sources */,
+				FC4F38DA1D2B89B600751ADC /* Model.xcdatamodeld in Sources */,
+				FC4F38E31D2B8B9700751ADC /* Cart+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +439,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FC4F38D81D2B89B600751ADC /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FC4F38D91D2B89B600751ADC /* Model.xcdatamodel */,
+			);
+			currentVersion = FC4F38D91D2B89B600751ADC /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FC2CA0531D2B4D4900839E4E /* Project object */;
 }

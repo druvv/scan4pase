@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MagicalRecord
 
 class SearchVC: UITableViewController, UISearchResultsUpdating {
     var products: [Product]?
@@ -14,6 +15,8 @@ class SearchVC: UITableViewController, UISearchResultsUpdating {
     var filteredCustomProducts: [Product]?
     var filteredProducts: [Product]?
     let searchController = UISearchController(searchResultsController: nil)
+    
+    var selectedProduct: Product?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +52,9 @@ class SearchVC: UITableViewController, UISearchResultsUpdating {
         tableView.reloadData()
     }
     
+    deinit{
+        searchController.view.superview?.removeFromSuperview()
+    }
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if (section == 0) {return "Custom Items"}
         if (section == 1) {return "Standard Items"}
@@ -105,18 +111,47 @@ class SearchVC: UITableViewController, UISearchResultsUpdating {
             formatter.minimumFractionDigits = 2
             formatter.minimumIntegerDigits = 1
             cell.name.text = product.name
-            cell.sku.text = product.sku!
+            cell.sku.text = product.sku
             cell.pvBV.text = formatter.stringFromNumber(product.pv!)! + "/" + formatter.stringFromNumber(product.bv!)!
             formatter.numberStyle = .CurrencyStyle
             cell.retailCost.text = formatter.stringFromNumber(product.retailCost!)
             cell.iboCost.text = formatter.stringFromNumber(product.iboCost!)
             if product.custom!.boolValue {
-                cell.sku.textColor = UIColor(red: 38, green: 184, blue: 151)
+                cell.sku.textColor = UIColor(red: 97, green: 188, blue: 109)
             }
             return cell
         }
 
         return UITableViewCell()
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.section == 0) {
+            if (searchController.active && searchController.searchBar.text != "") {
+                selectedProduct = filteredCustomProducts![indexPath.row]
+            } else {
+                selectedProduct = customProducts![indexPath.row]
+            }
+            
+        } else {
+            if (searchController.active && searchController.searchBar.text != "") {
+                selectedProduct = filteredProducts![indexPath.row]
+            } else {
+                selectedProduct = products![indexPath.row]
+            }
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("searchToDetail", sender: nil)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "searchToDetail") {
+            let detailVC = segue.destinationViewController as! CartProductDetailVC
+            detailVC.product = selectedProduct
+        }
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
     }
 
 

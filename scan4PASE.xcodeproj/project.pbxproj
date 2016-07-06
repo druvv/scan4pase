@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		94366AFF32DE82ABC560B305 /* Pods_scan4pase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F3668285BBC16387BC43ED /* Pods_scan4pase.framework */; };
+		FC0744D01D2C7D1800E7F868 /* CartProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0744CF1D2C7D1800E7F868 /* CartProductDetailVC.swift */; };
 		FC1F38331D2C1D9A001CDF96 /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F38321D2C1D9A001CDF96 /* CartVC.swift */; };
 		FC1F38351D2C1DAF001CDF96 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F38341D2C1DAF001CDF96 /* ProductService.swift */; };
 		FC1F383B1D2C1E75001CDF96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC1F383A1D2C1E75001CDF96 /* GoogleService-Info.plist */; };
@@ -22,8 +23,6 @@
 		FC4F38DA1D2B89B600751ADC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38D81D2B89B600751ADC /* Model.xcdatamodeld */; };
 		FC4F38E11D2B8B9700751ADC /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DB1D2B8B9700751ADC /* Product+CoreDataProperties.swift */; };
 		FC4F38E21D2B8B9700751ADC /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DC1D2B8B9700751ADC /* Product.swift */; };
-		FC4F38E31D2B8B9700751ADC /* Cart+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DD1D2B8B9700751ADC /* Cart+CoreDataProperties.swift */; };
-		FC4F38E41D2B8B9700751ADC /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DE1D2B8B9700751ADC /* Cart.swift */; };
 		FC4F38E51D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DF1D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift */; };
 		FC4F38E61D2B8B9700751ADC /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38E01D2B8B9700751ADC /* CartProduct.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +31,7 @@
 		20F3668285BBC16387BC43ED /* Pods_scan4pase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_scan4pase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7F9060A460BED11A3B9D49 /* Pods-scan4pase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4pase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scan4pase/Pods-scan4pase.debug.xcconfig"; sourceTree = "<group>"; };
 		E07C9F6564252996406F30DD /* Pods-scan4pase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scan4pase.release.xcconfig"; path = "Pods/Target Support Files/Pods-scan4pase/Pods-scan4pase.release.xcconfig"; sourceTree = "<group>"; };
+		FC0744CF1D2C7D1800E7F868 /* CartProductDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProductDetailVC.swift; sourceTree = "<group>"; };
 		FC1F38321D2C1D9A001CDF96 /* CartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
 		FC1F38341D2C1DAF001CDF96 /* ProductService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
 		FC1F383A1D2C1E75001CDF96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -48,8 +48,6 @@
 		FC4F38D91D2B89B600751ADC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		FC4F38DB1D2B8B9700751ADC /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC4F38DC1D2B8B9700751ADC /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		FC4F38DD1D2B8B9700751ADC /* Cart+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cart+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		FC4F38DE1D2B8B9700751ADC /* Cart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		FC4F38DF1D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CartProduct+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC4F38E01D2B8B9700751ADC /* CartProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +81,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FC0744D11D2C7D2200E7F868 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FC1F383E1D2C37C4001CDF96 /* CartCell.swift */,
+				FC1F38401D2C37D8001CDF96 /* ProductCell.swift */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		FC0744D21D2C7D2E00E7F868 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FC1F38441D2C3853001CDF96 /* SearchVC.swift */,
+				FC0744CF1D2C7D1800E7F868 /* CartProductDetailVC.swift */,
+				FC1F38321D2C1D9A001CDF96 /* CartVC.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		FC2CA0521D2B4D4900839E4E = {
 			isa = PBXGroup;
 			children = (
@@ -105,11 +122,9 @@
 			isa = PBXGroup;
 			children = (
 				FC2CA05E1D2B4D4900839E4E /* AppDelegate.swift */,
-				FC1F38441D2C3853001CDF96 /* SearchVC.swift */,
-				FC1F38321D2C1D9A001CDF96 /* CartVC.swift */,
 				FC1F38341D2C1DAF001CDF96 /* ProductService.swift */,
-				FC1F383E1D2C37C4001CDF96 /* CartCell.swift */,
-				FC1F38401D2C37D8001CDF96 /* ProductCell.swift */,
+				FC0744D21D2C7D2E00E7F868 /* ViewControllers */,
+				FC0744D11D2C7D2200E7F868 /* Table View Cells */,
 				FC2CA0621D2B4D4900839E4E /* Main.storyboard */,
 				FC1F38461D2C477C001CDF96 /* DSHelper.swift */,
 				FC4F38E71D2B8BA200751ADC /* Core Data */,
@@ -127,8 +142,6 @@
 				FC4F38D81D2B89B600751ADC /* Model.xcdatamodeld */,
 				FC4F38DB1D2B8B9700751ADC /* Product+CoreDataProperties.swift */,
 				FC4F38DC1D2B8B9700751ADC /* Product.swift */,
-				FC4F38DD1D2B8B9700751ADC /* Cart+CoreDataProperties.swift */,
-				FC4F38DE1D2B8B9700751ADC /* Cart.swift */,
 				FC4F38DF1D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift */,
 				FC4F38E01D2B8B9700751ADC /* CartProduct.swift */,
 			);
@@ -292,8 +305,8 @@
 				FC1F38471D2C477C001CDF96 /* DSHelper.swift in Sources */,
 				FC2CA05F1D2B4D4900839E4E /* AppDelegate.swift in Sources */,
 				FC4F38E21D2B8B9700751ADC /* Product.swift in Sources */,
+				FC0744D01D2C7D1800E7F868 /* CartProductDetailVC.swift in Sources */,
 				FC4F38E61D2B8B9700751ADC /* CartProduct.swift in Sources */,
-				FC4F38E41D2B8B9700751ADC /* Cart.swift in Sources */,
 				FC1F383F1D2C37C4001CDF96 /* CartCell.swift in Sources */,
 				FC4F38E11D2B8B9700751ADC /* Product+CoreDataProperties.swift in Sources */,
 				FC1F38331D2C1D9A001CDF96 /* CartVC.swift in Sources */,
@@ -301,7 +314,6 @@
 				FC4F38DA1D2B89B600751ADC /* Model.xcdatamodeld in Sources */,
 				FC1F38411D2C37D8001CDF96 /* ProductCell.swift in Sources */,
 				FC1F38451D2C3853001CDF96 /* SearchVC.swift in Sources */,
-				FC4F38E31D2B8B9700751ADC /* Cart+CoreDataProperties.swift in Sources */,
 				FC1F38351D2C1DAF001CDF96 /* ProductService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,7 +430,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = scan4pase/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SringariWorldwide.com.scan4PASE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -433,7 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = scan4pase/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SringariWorldwide.com.scan4PASE;
 				PRODUCT_NAME = "$(TARGET_NAME)";

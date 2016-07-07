@@ -25,6 +25,10 @@
 		FC4F38E21D2B8B9700751ADC /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DC1D2B8B9700751ADC /* Product.swift */; };
 		FC4F38E51D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38DF1D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift */; };
 		FC4F38E61D2B8B9700751ADC /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4F38E01D2B8B9700751ADC /* CartProduct.swift */; };
+		FC71C2BE1D2D62C3003F3DDF /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC71C2BD1D2D62C3003F3DDF /* SettingsVC.swift */; };
+		FC71C2C01D2D74CA003F3DDF /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC71C2BF1D2D74CA003F3DDF /* AboutVC.swift */; };
+		FCB5BAF01D2E0C9F0045BE41 /* InvoiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB5BAEF1D2E0C9F0045BE41 /* InvoiceVC.swift */; };
+		FCCB3DF31D2DCC2200320F2E /* ConfigurationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB3DF21D2DCC2200320F2E /* ConfigurationVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +54,10 @@
 		FC4F38DC1D2B8B9700751ADC /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FC4F38DF1D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CartProduct+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC4F38E01D2B8B9700751ADC /* CartProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
+		FC71C2BD1D2D62C3003F3DDF /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		FC71C2BF1D2D74CA003F3DDF /* AboutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
+		FCB5BAEF1D2E0C9F0045BE41 /* InvoiceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceVC.swift; sourceTree = "<group>"; };
+		FCCB3DF21D2DCC2200320F2E /* ConfigurationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +102,12 @@
 			isa = PBXGroup;
 			children = (
 				FC1F38441D2C3853001CDF96 /* SearchVC.swift */,
+				FCB5BAEF1D2E0C9F0045BE41 /* InvoiceVC.swift */,
 				FC0744CF1D2C7D1800E7F868 /* CartProductDetailVC.swift */,
 				FC1F38321D2C1D9A001CDF96 /* CartVC.swift */,
+				FC71C2BD1D2D62C3003F3DDF /* SettingsVC.swift */,
+				FC71C2BF1D2D74CA003F3DDF /* AboutVC.swift */,
+				FCCB3DF21D2DCC2200320F2E /* ConfigurationVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -186,6 +198,11 @@
 					FC2CA05A1D2B4D4900839E4E = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = M23B6AYLDX;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -303,18 +320,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC1F38471D2C477C001CDF96 /* DSHelper.swift in Sources */,
+				FCCB3DF31D2DCC2200320F2E /* ConfigurationVC.swift in Sources */,
 				FC2CA05F1D2B4D4900839E4E /* AppDelegate.swift in Sources */,
 				FC4F38E21D2B8B9700751ADC /* Product.swift in Sources */,
 				FC0744D01D2C7D1800E7F868 /* CartProductDetailVC.swift in Sources */,
 				FC4F38E61D2B8B9700751ADC /* CartProduct.swift in Sources */,
 				FC1F383F1D2C37C4001CDF96 /* CartCell.swift in Sources */,
 				FC4F38E11D2B8B9700751ADC /* Product+CoreDataProperties.swift in Sources */,
+				FCB5BAF01D2E0C9F0045BE41 /* InvoiceVC.swift in Sources */,
 				FC1F38331D2C1D9A001CDF96 /* CartVC.swift in Sources */,
 				FC4F38E51D2B8B9700751ADC /* CartProduct+CoreDataProperties.swift in Sources */,
 				FC4F38DA1D2B89B600751ADC /* Model.xcdatamodeld in Sources */,
 				FC1F38411D2C37D8001CDF96 /* ProductCell.swift in Sources */,
+				FC71C2C01D2D74CA003F3DDF /* AboutVC.swift in Sources */,
 				FC1F38451D2C3853001CDF96 /* SearchVC.swift in Sources */,
 				FC1F38351D2C1DAF001CDF96 /* ProductService.swift in Sources */,
+				FC71C2BE1D2D62C3003F3DDF /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

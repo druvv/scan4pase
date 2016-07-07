@@ -24,8 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MagicalRecord.setupAutoMigratingCoreDataStack()
         FIRApp.configure()
         
+        let appDefaults = ["taxPercentage": NSNumber(int: 6)]
+        NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
+        
+        // Tab Bar Appearance
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.grayColor()], forState: .Normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 38, green: 184, blue: 151)], forState: .Selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 43, green: 130, blue: 201)], forState: .Selected)
         
         
         return true

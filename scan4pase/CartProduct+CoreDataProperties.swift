@@ -14,7 +14,7 @@ import CoreData
 
 extension CartProduct {
 
-    @NSManaged var quantity: NSNumber?
+    @NSManaged var quantity: NSDecimalNumber?
     @NSManaged var product: Product?
     @NSManaged var taxable: NSNumber?
 

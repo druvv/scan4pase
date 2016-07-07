@@ -13,4 +13,5 @@ target 'scan4pase' do
   pod 'Firebase/Crash'
   pod 'Firebase/Messaging'
   pod 'Alamofire'
+  pod 'StaticDataTableViewController'
 end

@@ -9,13 +9,7 @@
 import UIKit
 import MagicalRecord
 
-enum ValidationError: ErrorType {
-	case QuantityZero
-	case QuantityInvalid
-	case QuantityNone
-}
-
-class CartProductDetailVC: UIViewController {
+class CartProductDetailVC: UIViewController, UITextFieldDelegate {
 	@IBOutlet var name: UILabel!
 	@IBOutlet var quantity: UITextField!
 	@IBOutlet var taxable: UISegmentedControl!
@@ -26,10 +20,28 @@ class CartProductDetailVC: UIViewController {
     var edit = false
     var saved = false
     
+    enum ValidationError: ErrorType {
+        case QuantityZero
+        case QuantityInvalid
+        case QuantityNone
+    }
+    
+    
+    lazy var formatter: NSNumberFormatter = {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        formatter.minimumIntegerDigits = 1
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 0
+        return formatter
+    }()
+    
     let moc = NSManagedObjectContext.MR_defaultContext()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
+        quantity.delegate = self
         
         if let cartProduct = CartProduct.MR_findFirstByAttribute("product", withValue: product, inContext: moc) {
             self.cartProduct = cartProduct 
@@ -42,14 +54,16 @@ class CartProductDetailVC: UIViewController {
 
 		// Do any additional setup after loading the view.
         name.text = product.name
-        quantity.text = cartProduct.quantity?.stringValue
         
-        if let taxable = cartProduct.taxable?.boolValue {
-            self.taxable.selectedSegmentIndex = taxable ? 0 : 1
+        if let quantity = cartProduct.quantity {
+            self.quantity.text = quantity.stringValue
+            if self.quantity.text == "0" {
+                self.quantity.text = "1"
+            }
         }
         
-        if (quantity.text == "0") {
-            quantity.text = "1"
+        if let taxable = cartProduct.taxable {
+            self.taxable.selectedSegmentIndex = taxable.boolValue ? 0 : 1
         }
         
         if edit {
@@ -58,6 +72,14 @@ class CartProductDetailVC: UIViewController {
         
         title = product.sku
         
+        let keyboardDoneButtonView = UIToolbar()
+        keyboardDoneButtonView.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(dismissKeyboard))
+        let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        
+        keyboardDoneButtonView.items = [flexibleWidth,doneButton]
+        quantity.inputAccessoryView = keyboardDoneButtonView
+        
 	}
 
 	@IBAction func addToCart(sender: AnyObject) {
@@ -65,7 +87,7 @@ class CartProductDetailVC: UIViewController {
 		do {
 			try validateEntries()
 		} catch ValidationError.QuantityZero {
-			let alert = UIAlertController(title: "Error!", message: "The quantity can not be zero.", preferredStyle: .Alert)
+			let alert = UIAlertController(title: "Error!", message: "The quantity can not be less than or equal to zero.", preferredStyle: .Alert)
 			alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
 			presentViewController(alert, animated: true, completion: nil)
 			return
@@ -87,8 +109,8 @@ class CartProductDetailVC: UIViewController {
 			presentViewController(alert, animated: true, completion: nil)
 			return
 		}
-
-		cartProduct.quantity = NSNumber(integer: Int(quantity.text!)!)
+        
+        cartProduct.quantity = NSDecimalNumber(decimal: formatter.numberFromString(quantity.text!)!.decimalValue)
 		cartProduct.taxable = NSNumber(bool: taxable.selectedSegmentIndex == 0)
 		moc.MR_saveToPersistentStoreAndWait()
         saved = true
@@ -99,20 +121,28 @@ class CartProductDetailVC: UIViewController {
     override func viewWillDisappear(animated : Bool) {
         super.viewWillDisappear(animated)
         
-        if self.isMovingFromParentViewController() && !saved{
+        if self.isMovingFromParentViewController() && !saved && !edit{
             cartProduct.MR_deleteEntity()
         }
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
 	func validateEntries() throws {
-		if (quantity.text == "") {
-			throw ValidationError.QuantityNone
-		} else if (Int(quantity.text!) == nil || Int(quantity.text!) < 0) {
-			throw ValidationError.QuantityInvalid
-		} else if (quantity.text == "0") {
-			throw ValidationError.QuantityZero
-		}
-	}
+        
+        if (quantity.text == "") {
+            throw ValidationError.QuantityNone
+        } else if let num = formatter.numberFromString(quantity.text!) {
+            if num.doubleValue <= 0 {
+                throw ValidationError.QuantityZero
+            }
+        } else {
+            throw ValidationError.QuantityInvalid
+        }
+    }
 
     @IBAction func increase(sender: AnyObject) {
         if var num = Int(quantity.text!) {

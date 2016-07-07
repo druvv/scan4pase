@@ -52,7 +52,6 @@ class ProductService {
 
 	private class func parseProducts() throws {
 		let moc = NSManagedObjectContext.MR_defaultContext()
-		Product.MR_deleteAllMatchingPredicate(NSPredicate(format: "custom != TRUE", argumentArray: nil), inContext: moc)
         
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         let documentsDirectory = paths[0]
@@ -71,17 +70,22 @@ class ProductService {
 			let bv = components[3]
 			let iboPrice = components[4]
 			let retailPrice = components[5]
-
-			if let product = Product.MR_createEntityInContext(moc) {
-				product.sku = sku
-				product.name = name
-				product.pv = NSDecimalNumber(string: pv)
-				product.bv = NSDecimalNumber(string: bv)
-				product.iboCost = NSDecimalNumber(string: iboPrice)
-				product.retailCost = NSDecimalNumber(string: retailPrice)
-				product.custom = NSNumber(bool: false)
-
-			}
+            
+            let product: Product
+            
+            if let p = Product.MR_findFirstWithPredicate(NSPredicate(format: "custom != TRUE AND sku == %@", argumentArray: [sku]), inContext: moc) {
+                product = p
+            } else {
+                product = Product.MR_createEntityInContext(moc)!
+            }
+            
+            product.sku = sku
+            product.name = name
+            product.pv = NSDecimalNumber(string: pv)
+            product.bv = NSDecimalNumber(string: bv)
+            product.iboCost = NSDecimalNumber(string: iboPrice)
+            product.retailCost = NSDecimalNumber(string: retailPrice)
+            product.custom = NSNumber(bool: false)
 		}
 
 		moc.MR_saveToPersistentStoreAndWait()

@@ -38,12 +38,27 @@ class SearchVC: UITableViewController, UISearchResultsUpdating {
     // MARK: - Table view data source
     
     func filterContentForSearchText(searchText: String) {
-        filteredProducts = products?.filter({$0.name!.rangeOfString(searchText, options: [NSStringCompareOptions.CaseInsensitiveSearch]) != nil || $0.sku!.rangeOfString(searchText, options: [NSStringCompareOptions.CaseInsensitiveSearch]) != nil})
-        filteredCustomProducts = customProducts?.filter({$0.name!.rangeOfString(searchText, options: [NSStringCompareOptions.CaseInsensitiveSearch]) != nil || $0.sku!.rangeOfString(searchText, options: [NSStringCompareOptions.CaseInsensitiveSearch]) != nil})
+        var words = searchText.componentsSeparatedByString(" ")
+        
+        words = words.filter{$0 != ""}
+        
+        var namePredicates: [NSPredicate] = []
+        for word in words {
+            let predicate = NSPredicate(format: "name CONTAINS[c] %@", argumentArray: [word])
+            namePredicates.append(predicate)
+        }
+        let compoundNamePredicate = NSCompoundPredicate(type: .AndPredicateType, subpredicates: namePredicates)
+        
+        let skuPredicate = NSPredicate(format: "sku CONTAINS[c] %@", argumentArray: [searchText])
+        
+        filteredProducts = products?.filter{compoundNamePredicate.evaluateWithObject($0) || skuPredicate.evaluateWithObject($0)}
+        filteredCustomProducts = customProducts?.filter{compoundNamePredicate.evaluateWithObject($0) || skuPredicate.evaluateWithObject($0)}
+        
+        
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        self.filterContentForSearchText(searchController.searchBar.text!)
+        filterContentForSearchText(searchController.searchBar.text!)
         tableView.reloadData()
     }
     

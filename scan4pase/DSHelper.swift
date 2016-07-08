@@ -180,3 +180,14 @@ extension UIColor {
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
 }
+
+func +=(lhs: NSMutableAttributedString, rhs: NSAttributedString) {
+    lhs.appendAttributedString(rhs)
+}
+
+func +(lhs: NSMutableAttributedString, rhs: NSMutableAttributedString) -> NSMutableAttributedString {
+    let returnString = NSMutableAttributedString(attributedString: lhs)
+    returnString.appendAttributedString(rhs)
+    return returnString
+}
+

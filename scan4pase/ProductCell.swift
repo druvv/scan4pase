@@ -14,5 +14,20 @@ class ProductCell: UITableViewCell {
     @IBOutlet var pvBV: UILabel!
     @IBOutlet var retailCost: UILabel!
     @IBOutlet var iboCost: UILabel!
-    @IBOutlet var quantity: UILabel!
+    
+    func load(withProduct product: Product) {
+        let formatter = NSNumberFormatter()
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        formatter.minimumIntegerDigits = 1
+        name.text = product.name
+        sku.text = product.sku
+        pvBV.text = formatter.stringFromNumber(product.pv!)! + "/" + formatter.stringFromNumber(product.bv!)!
+        formatter.numberStyle = .CurrencyStyle
+        retailCost.text = formatter.stringFromNumber(product.retailCost!)
+        iboCost.text = formatter.stringFromNumber(product.iboCost!)
+        if product.custom!.boolValue {
+            sku.textColor = UIColor(red: 97, green: 188, blue: 109)
+        }
+    }
 }

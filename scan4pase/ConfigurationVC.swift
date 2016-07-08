@@ -31,23 +31,19 @@ class ConfigurationVC: StaticDataTableViewController {
 	@IBOutlet var otherMethodName: UITextField!
 
     @IBOutlet var finshButton: UIBarButtonItem!
+    
+    var cartDelegate: CartVCDelegate!
 	override func viewDidLoad() {
 		super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-
+        
 		cell(methodCell, setHidden: true)
 		cell(checkNumberCell, setHidden: true)
 		cell(otherMethodNameCell, setHidden: true)
         hideSectionsWithHiddenRows = true
 		reloadDataAnimated(false)
-
-		// Uncomment the following line to preserve selection between presentations
-		// self.clearsSelectionOnViewWillAppear = false
-
-		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		// self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         let keyboardDoneButtonView = UIToolbar()
         keyboardDoneButtonView.sizeToFit()
@@ -135,6 +131,30 @@ class ConfigurationVC: StaticDataTableViewController {
     
     @IBAction func somethingChanged(sender: AnyObject) {
         finshButton.enabled = entriesValid()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "invoice" {
+            let invoiceVC = segue.destinationViewController as! InvoiceVC
+            invoiceVC.cartDelegate = cartDelegate
+            invoiceVC.name = name.text
+            invoiceVC.iboNumber = iboNumber.text
+            invoiceVC.checkNumber = checkNumber.text
+            invoiceVC.otherMethodName = otherMethodName.text
+            invoiceVC.paid = paid.selectedSegmentIndex == 0
+            switch method.selectedSegmentIndex {
+            case 0:
+                invoiceVC.paymentMethod = PaymentMethod.Cash
+            case 1:
+                invoiceVC.paymentMethod = PaymentMethod.Check
+            case 2:
+                invoiceVC.paymentMethod = PaymentMethod.CreditCard
+            case 3:
+                invoiceVC.paymentMethod = PaymentMethod.Other
+            default:
+                break
+            }
+        }
     }
     
 }

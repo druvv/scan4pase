@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MagicalRecord.setupAutoMigratingCoreDataStack()
         FIRApp.configure()
         
-        let appDefaults = ["taxPercentage": NSNumber(int: 6)]
+        let appDefaults = ["taxPercentage": NSNumber(int: 6), "creditCardFeePercentage": NSNumber(int: 3)]
         NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
         
         // Tab Bar Appearance

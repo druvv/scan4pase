@@ -14,4 +14,5 @@ target 'scan4pase' do
   pod 'Firebase/Messaging'
   pod 'Alamofire'
   pod 'StaticDataTableViewController'
+  pod 'MTBBarcodeScanner'
 end

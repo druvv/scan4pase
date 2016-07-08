@@ -22,15 +22,16 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        products = Product.MR_findByAttribute("custom", withValue: false) as! [Product]
-        customProducts = Product.MR_findByAttribute("custom", withValue: true) as! [Product]
-        
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
+        products = Product.MR_findByAttribute("custom", withValue: false) as! [Product]
+        customProducts = Product.MR_findByAttribute("custom", withValue: true) as! [Product]
         
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        let editButton = editButtonItem()
+        editButton.tintColor = UIColor.whiteColor()
+        self.navigationItem.leftBarButtonItem = editButton
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,7 +41,7 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        customProducts = Product.MR_findByAttribute("custom", withValue: true) as! [Product]
         tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0,2)), withRowAnimation: .Automatic)
     }
     
@@ -168,7 +169,6 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             let currentProduct: Product
             if (searchController.active && searchController.searchBar.text != "") {
                 currentProduct = filteredCustomProducts[indexPath.row]
@@ -178,11 +178,15 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
                 customProducts.removeAtIndex(indexPath.row)
             }
             currentProduct.MR_deleteEntity()
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
         if segue.identifier == "editProduct" {
             if let product = selectedProduct {
                 let editVC = segue.destinationViewController as! EditProductVC

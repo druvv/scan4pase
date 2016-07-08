@@ -28,6 +28,8 @@ class ProductCell: UITableViewCell {
         iboCost.text = formatter.stringFromNumber(product.iboCost!)
         if product.custom!.boolValue {
             sku.textColor = UIColor(red: 97, green: 188, blue: 109)
+        } else {
+            sku.textColor = UIColor(red: 43, green: 130, blue: 201)
         }
     }
 }

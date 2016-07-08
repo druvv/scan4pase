@@ -9,7 +9,7 @@
 import UIKit
 import MagicalRecord
 
-class EditProductVC: UITableViewController {
+class EditProductVC: UITableViewController, UITextFieldDelegate {
 	@IBOutlet var name: UITextField!
 	@IBOutlet var sku: UITextField!
 	@IBOutlet var pv: UITextField!
@@ -36,7 +36,23 @@ class EditProductVC: UITableViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+        
+        pv.delegate = self
+        bv.delegate = self
+        iboCost.delegate = self
+        retailCost.delegate = self
+        
+        let keyboardDoneButtonView = UIToolbar()
+        keyboardDoneButtonView.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(dismissKeyboard))
+        let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        
+        keyboardDoneButtonView.items = [flexibleWidth,doneButton]
+        pv.inputAccessoryView = keyboardDoneButtonView
+        bv.inputAccessoryView = keyboardDoneButtonView
+        iboCost.inputAccessoryView = keyboardDoneButtonView
+        retailCost.inputAccessoryView = keyboardDoneButtonView
+        
 		if let product = product {
 			name.text = product.name
 			sku.text = product.sku
@@ -44,7 +60,7 @@ class EditProductVC: UITableViewController {
 			bv.text = decimalFormatter.stringFromNumber(product.bv!)
 			retailCost.text = currencyFormatter.stringFromNumber(product.retailCost!)
 			iboCost.text = currencyFormatter.stringFromNumber(product.iboCost!)
-            self.navigationController?.navigationBar.topItem?.title = "Edit Product"
+            title = "Edit Product"
 		}
 	}
 
@@ -65,7 +81,7 @@ class EditProductVC: UITableViewController {
 		presentViewController(alert, animated: true, completion: nil)
 	}
 
-	func validateNumber(number: NSDecimalNumber) -> Bool {
+	func validateNumber(number: NSNumber) -> Bool {
 		if number.doubleValue >= 0 {
 			return true
 		} else {
@@ -73,36 +89,26 @@ class EditProductVC: UITableViewController {
 			return false
 		}
 	}
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if let num = decimalFormatter.numberFromString(textField.text!) {
+            if validateNumber(num) {
+                if textField == iboCost || textField == retailCost {
+                    textField.text = currencyFormatter.stringFromNumber(num)
+                } else {
+                    textField.text = decimalFormatter.stringFromNumber(num)
+                }
+            } else {
+                showInvalidError()
+                textField.text = ""
+            }
+        } else {
+            textField.text = ""
+            showInvalidError()
+        }
+    }
 
-	@IBAction func checkPvBv(sender: AnyObject) {
-		let textField = sender as! UITextField
-		if let num = decimalFormatter.numberFromString(textField.text!) {
-			let num = NSDecimalNumber(decimal: num.decimalValue)
-			if !validateNumber(num) {
-				textField.text = ""
-			} else {
-				textField.text = decimalFormatter.stringFromNumber(num)
-			}
-		} else {
-			showInvalidError()
-			textField.text = ""
-		}
-	}
-
-	@IBAction func checkCosts(sender: AnyObject) {
-		let textField = sender as! UITextField
-		if let num = currencyFormatter.numberFromString(textField.text!) {
-			let num = NSDecimalNumber(decimal: num.decimalValue)
-			if !validateNumber(num) {
-				textField.text = ""
-			} else {
-				textField.text = currencyFormatter.stringFromNumber(num)
-			}
-		} else {
-			showInvalidError()
-			textField.text = ""
-		}
-	}
+	
 
 	func validateAllEntries() -> Bool {
 		return name.text != "" && sku.text != "" && pv.text != "" && bv.text != "" && retailCost != "" && iboCost != ""
@@ -119,6 +125,7 @@ class EditProductVC: UITableViewController {
 			product!.bv = NSDecimalNumber(decimal: decimalFormatter.numberFromString(bv.text!)!.decimalValue)
 			product!.retailCost = NSDecimalNumber(decimal: currencyFormatter.numberFromString(retailCost.text!)!.decimalValue)
 			product!.iboCost = NSDecimalNumber(decimal: currencyFormatter.numberFromString(iboCost.text!)!.decimalValue)
+            product!.custom = NSNumber(bool: true)
 			NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
 			navigationController?.popViewControllerAnimated(true)
 

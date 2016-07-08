@@ -206,13 +206,6 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 		return true
 	}
 
-	func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-		if (cart.editing) {
-			return UITableViewCellEditingStyle.Delete
-		}
-		return UITableViewCellEditingStyle.None
-	}
-
 	override func setEditing(editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
 		cart.setEditing(editing, animated: true)

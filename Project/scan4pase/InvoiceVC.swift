@@ -51,7 +51,7 @@ class InvoiceVC: UIViewController {
         let normal = [NSFontAttributeName: UIFont.systemFontOfSize(fontSize), NSForegroundColorAttributeName: UIColor.blackColor()]
         let normalRight = [NSFontAttributeName: UIFont.systemFontOfSize(fontSize), NSForegroundColorAttributeName: UIColor.blackColor(),  NSParagraphStyleAttributeName: paragraphRight]
         
-        subject = "scan4pase Invoice \(name)"
+        subject = "scan4pase - Invoice - \(name)"
         
         // Identification
         invoiceText += NSMutableAttributedString(string: "Identification\n", attributes: boldBlue)

@@ -31,7 +31,11 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
+        searchController.searchBar.scopeButtonTitles = []
+        searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

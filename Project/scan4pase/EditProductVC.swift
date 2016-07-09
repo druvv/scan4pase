@@ -48,6 +48,8 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
         let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
         
         keyboardDoneButtonView.items = [flexibleWidth,doneButton]
+        name.inputAccessoryView = keyboardDoneButtonView
+        sku.inputAccessoryView = keyboardDoneButtonView
         pv.inputAccessoryView = keyboardDoneButtonView
         bv.inputAccessoryView = keyboardDoneButtonView
         iboCost.inputAccessoryView = keyboardDoneButtonView

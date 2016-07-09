@@ -25,7 +25,10 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
+        searchController.searchBar.scopeButtonTitles = []
+        searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
+        
         products = Product.MR_findByAttribute("custom", withValue: false) as! [Product]
         customProducts = Product.MR_findByAttribute("custom", withValue: true) as! [Product]
         

@@ -978,7 +978,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gnl-80-OVx">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gnl-80-OVx">
                                                     <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                                     <color key="textColor" red="0.16862745100000001" green="0.50980392159999999" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1223,10 +1223,10 @@
                     <connections>
                         <outlet property="bv" destination="dEG-Dt-qfv" id="S57-EY-mME"/>
                         <outlet property="iboCost" destination="8wh-Rl-1yg" id="rig-Iz-EXv"/>
-                        <outlet property="name" destination="O4Y-KI-pUz" id="kwm-yZ-xil"/>
+                        <outlet property="name" destination="gnl-80-OVx" id="w2d-sV-nWI"/>
                         <outlet property="pv" destination="G5d-z9-PTd" id="PAA-dZ-r21"/>
                         <outlet property="retailCost" destination="Sjx-WH-xdE" id="XJn-vL-Shf"/>
-                        <outlet property="sku" destination="gnl-80-OVx" id="wDv-XZ-hkH"/>
+                        <outlet property="sku" destination="O4Y-KI-pUz" id="heH-iS-IhM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCq-Qx-oKt" userLabel="First Responder" sceneMemberID="firstResponder"/>

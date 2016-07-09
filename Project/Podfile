@@ -6,7 +6,6 @@ target 'scan4pase' do
   use_frameworks!
 
   # Pods for scan4pase
-  pod 'ActionSheetPicker-3.0'
   pod 'MagicalRecord'
   pod 'Firebase'
   pod 'Firebase/Storage'

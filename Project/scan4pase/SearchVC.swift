@@ -90,6 +90,10 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 84
+    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows

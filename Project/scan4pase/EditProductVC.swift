@@ -116,16 +116,22 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
 
 	@IBAction func save(sender: AnyObject) {
 		if validateAllEntries() {
-			if product == nil {
-				product = Product.MR_createEntity()
-			}
-			product!.name = name.text
-			product!.sku = sku.text
-			product!.pv = NSDecimalNumber(decimal: decimalFormatter.numberFromString(pv.text!)!.decimalValue)
-			product!.bv = NSDecimalNumber(decimal: decimalFormatter.numberFromString(bv.text!)!.decimalValue)
-			product!.retailCost = NSDecimalNumber(decimal: currencyFormatter.numberFromString(retailCost.text!)!.decimalValue)
-			product!.iboCost = NSDecimalNumber(decimal: currencyFormatter.numberFromString(iboCost.text!)!.decimalValue)
-            product!.custom = NSNumber(bool: true)
+            
+            // If we have a custom product edit its values, if we have a standard product create a custom product, and if we have no product create it
+            let newProduct: Product
+            if let product = self.product where product.custom!.boolValue  {
+                newProduct = product
+            } else {
+                newProduct = Product.MR_createEntity()!
+            }
+            
+			newProduct.name = name.text
+			newProduct.sku = sku.text
+			newProduct.pv = NSDecimalNumber(decimal: decimalFormatter.numberFromString(pv.text!)!.decimalValue)
+			newProduct.bv = NSDecimalNumber(decimal: decimalFormatter.numberFromString(bv.text!)!.decimalValue)
+			newProduct.retailCost = NSDecimalNumber(decimal: currencyFormatter.numberFromString(retailCost.text!)!.decimalValue)
+			newProduct.iboCost = NSDecimalNumber(decimal: currencyFormatter.numberFromString(iboCost.text!)!.decimalValue)
+            newProduct.custom = NSNumber(bool: true)
 			NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
 			navigationController?.popViewControllerAnimated(true)
 

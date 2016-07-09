@@ -50,6 +50,7 @@ class SettingsVC: UITableViewController, UITextFieldDelegate {
 
 		keyboardDoneButtonView.items = [flexibleWidth, doneButton]
 		taxPercentage.inputAccessoryView = keyboardDoneButtonView
+        creditCardFeePercentage.inputAccessoryView = keyboardDoneButtonView
 	}
 
 	func showError() {

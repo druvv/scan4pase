@@ -20,6 +20,9 @@ class ProductService {
 		let storage = FIRStorage.storage()
 		let storageRef = storage.referenceForURL("gs://project-2924719563810163534.appspot.com/")
 		let fileRef = storageRef.child("products.csv")
+        
+        storage.maxDownloadRetryTime = 5
+        storage.maxOperationRetryTime = 5
 
 		if NSFileManager.defaultManager().fileExistsAtPath(filePath) {
 			fileRef.writeToFile(NSURL(fileURLWithPath: filePath), completion: { URL, error in
@@ -59,6 +62,8 @@ class ProductService {
         
         let fileString = try NSString(contentsOfFile: filePath, encoding: NSUTF8StringEncoding)
         let lineArray = fileString.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+        
+        var productsToDelete = Product.MR_findByAttribute("custom", withValue: false) as! [Product]
 
 
 		for line in lineArray {
@@ -73,8 +78,9 @@ class ProductService {
             
             let product: Product
             
-            if let p = Product.MR_findFirstWithPredicate(NSPredicate(format: "custom != TRUE AND sku == %@", argumentArray: [sku]), inContext: moc) {
+            if let p = productsToDelete.filter({$0.custom!.boolValue != true && $0.sku == sku}).first {
                 product = p
+                productsToDelete.removeObject(p)
             } else {
                 product = Product.MR_createEntityInContext(moc)!
             }
@@ -87,6 +93,10 @@ class ProductService {
             product.retailCost = NSDecimalNumber(string: retailPrice)
             product.custom = NSNumber(bool: false)
 		}
+        
+        for product in productsToDelete {
+            product.MR_deleteEntity()
+        }
 
 		moc.MR_saveToPersistentStoreAndWait()
 	}

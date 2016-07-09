@@ -126,7 +126,7 @@ class InvoiceVC: UIViewController {
         
         if let cartProducts = CartProduct.MR_findAll() as? [CartProduct] {
             for cartProduct in cartProducts {
-                invoiceText += NSMutableAttributedString(string: "\(cartProduct.product!.sku!) (\(cartProduct.quantity!.stringValue))", attributes: boldBlue)
+                invoiceText += NSMutableAttributedString(string: "\(cartProduct.product!.sku!) \(cartProduct.product!.custom!.boolValue ? "Custom" : "") (\(cartProduct.quantity!.stringValue))", attributes: boldBlue)
                 invoiceText += NSMutableAttributedString(string: " - \(cartProduct.product!.name!)\n", attributes: normal)
             }
         }

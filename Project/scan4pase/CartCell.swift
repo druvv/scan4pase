@@ -24,6 +24,11 @@ class CartCell: UITableViewCell {
         formatter.minimumIntegerDigits = 1
         name.text = product.name
         sku.text = product.sku
+        if cartProduct.taxable!.boolValue {
+            sku.text = sku.text! + " (Taxed)"
+        } else {
+            sku.text = sku.text! + " (Not Taxed)"
+        }
         pvBV.text = formatter.stringFromNumber(product.pv!)! + "/" + formatter.stringFromNumber(product.bv!)!
         formatter.numberStyle = .CurrencyStyle
         retailCost.text = formatter.stringFromNumber(product.retailCost!)

@@ -71,8 +71,8 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 				UIApplication.sharedApplication().endIgnoringInteractionEvents()
 				if (!successful) {
 					self.activitiyIndicator.stopAnimating()
-					let alert = UIAlertController(title: "Error!", message: "Failed to load products. Check your connection and try again.", preferredStyle: .Alert)
-					alert.addAction(UIAlertAction(title: "Retry", style: .Default, handler: { _ in
+					let alert = UIAlertController(title: "Error!", message: "We failed to load the products. Check your connection and try again.", preferredStyle: .Alert)
+					alert.addAction(UIAlertAction(title: "Retry", style: .Default, handler: { [unowned self] _ in
 						self.loadProducts()
 						}))
 					self.presentViewController(alert, animated: true, completion: nil)

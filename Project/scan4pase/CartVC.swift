@@ -71,8 +71,8 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 				UIApplication.sharedApplication().endIgnoringInteractionEvents()
 				if (!successful) {
 					self.activitiyIndicator.stopAnimating()
-					let alert = UIAlertController(title: "Error!", message: "Failed to load products. Check your connection and try again.", preferredStyle: .Alert)
-					alert.addAction(UIAlertAction(title: "Retry", style: .Default, handler: { _ in
+					let alert = UIAlertController(title: "Error!", message: "We failed to load the products. Check your connection and try again.", preferredStyle: .Alert)
+					alert.addAction(UIAlertAction(title: "Retry", style: .Default, handler: { [unowned self] _ in
 						self.loadProducts()
 						}))
 					self.presentViewController(alert, animated: true, completion: nil)
@@ -102,7 +102,6 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 		let roundUP = NSDecimalNumberHandler(roundingMode: .RoundPlain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
 
 		var retailCostTaxTotal: NSDecimalNumber = 0
-		var iboCostTaxTotal: NSDecimalNumber = 0
 
 		for cartProduct in cartProducts {
 			let product = cartProduct.product!
@@ -120,10 +119,8 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 				taxPercentage = taxPercentage.decimalNumberByMultiplyingByPowerOf10(-2, withBehavior: roundUP)
 
 				let retailTax = qRetailCost.decimalNumberByMultiplyingBy(taxPercentage, withBehavior: roundUP)
-				let iboTax = qIboCost.decimalNumberByMultiplyingBy(taxPercentage, withBehavior: roundUP)
 
 				retailCostTaxTotal = retailCostTaxTotal.decimalNumberByAdding(retailTax, withBehavior: roundUP)
-				iboCostTaxTotal = iboCostTaxTotal.decimalNumberByAdding(iboTax, withBehavior: roundUP)
 			}
 
 			pvTotal = pvTotal.decimalNumberByAdding(qPV, withBehavior: roundUP)
@@ -133,7 +130,7 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 		}
 
 		retailCostGrandTotal = retailCostSubtotal.decimalNumberByAdding(retailCostTaxTotal, withBehavior: roundUP)
-		iboCostGrandTotal = iboCostSubtotal.decimalNumberByAdding(iboCostTaxTotal, withBehavior: roundUP)
+		iboCostGrandTotal = iboCostSubtotal.decimalNumberByAdding(retailCostTaxTotal, withBehavior: roundUP)
 
 		navigationController?.navigationBar.topItem?.title = "Cart(\(quantityTotal.stringValue))"
 

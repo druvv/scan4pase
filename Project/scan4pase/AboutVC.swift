@@ -15,9 +15,9 @@ class AboutVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
-        let build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
-        versionLabel.text = version + "." + build
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        let build = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
+        versionLabel.text = version + " (" + build + ")"
         
     }
 

@@ -11,20 +11,20 @@ import MagicalRecord
 import FirebaseStorage
 
 class ProductService {
-	class func importProducts(completion: (Bool, NSError?) -> Void) {
-		let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+	class func importProducts(_ completion: @escaping (Bool, NSError?) -> Void) {
+		let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
 		let documentsDirectory = paths[0]
 		let filePath = documentsDirectory + "/products.csv"
 
 		let storage = FIRStorage.storage()
-		let storageRef = storage.referenceForURL("gs://project-2924719563810163534.appspot.com/")
+		let storageRef = storage.reference(forURL: "gs://project-2924719563810163534.appspot.com/")
 		let fileRef = storageRef.child("products.csv")
         
         storage.maxDownloadRetryTime = 5
         storage.maxOperationRetryTime = 5
 
-		if NSFileManager.defaultManager().fileExistsAtPath(filePath) {
-			fileRef.writeToFile(NSURL(fileURLWithPath: filePath), completion: { URL, error in
+		if FileManager.default.fileExists(atPath: filePath) {
+			fileRef.write(toFile: URL(fileURLWithPath: filePath), completion: { URL, error in
 				if (error != nil) {
 					completion(true, nil)
 				} else {
@@ -37,9 +37,9 @@ class ProductService {
 				}
 			})
 		} else {
-			fileRef.writeToFile(NSURL(fileURLWithPath: filePath), completion: { URL, error in
+			fileRef.write(toFile: URL(fileURLWithPath: filePath), completion: { URL, error in
 				if (error != nil) {
-					completion(false, error)
+					completion(false, error as NSError?)
 				} else {
                     do {
                         try parseProducts()
@@ -52,21 +52,21 @@ class ProductService {
 		}
 	}
 
-	private class func parseProducts() throws {
-		let moc = NSManagedObjectContext.MR_defaultContext()
+	fileprivate class func parseProducts() throws {
+		let moc = NSManagedObjectContext.mr_default()
         
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
         let filePath = documentsDirectory + "/products.csv"
         
-        let fileString = try NSString(contentsOfFile: filePath, encoding: NSUTF8StringEncoding)
-        let lineArray = fileString.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+        let fileString = try NSString(contentsOfFile: filePath, encoding: String.Encoding.utf8.rawValue)
+        let lineArray = fileString.components(separatedBy: CharacterSet.newlines)
         
-        var productsToDelete = Product.MR_findByAttribute("custom", withValue: false) as! [Product]
+        var productsToDelete = Product.mr_find(byAttribute: "custom", withValue: false) as! [Product]
 
 
 		for line in lineArray {
-			let components = line.componentsSeparatedByString(";")
+			let components = line.components(separatedBy: ";")
 
 			let sku = components[0]
 			let name = components[1]
@@ -81,7 +81,7 @@ class ProductService {
                 product = p
                 productsToDelete.removeObject(p)
             } else {
-                product = Product.MR_createEntityInContext(moc)!
+                product = Product.mr_createEntity(in: moc)!
             }
             
             product.sku = sku
@@ -90,13 +90,13 @@ class ProductService {
             product.bv = NSDecimalNumber(string: bv)
             product.iboCost = NSDecimalNumber(string: iboPrice)
             product.retailCost = NSDecimalNumber(string: retailPrice)
-            product.custom = NSNumber(bool: false)
+            product.custom = NSNumber(value: false as Bool)
 		}
         
         for product in productsToDelete {
-            product.MR_deleteEntity()
+            product.mr_deleteEntity()
         }
 
-		moc.MR_saveToPersistentStoreAndWait()
+		moc.mr_saveToPersistentStoreAndWait()
 	}
 }

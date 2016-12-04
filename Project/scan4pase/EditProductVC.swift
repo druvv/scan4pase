@@ -19,15 +19,15 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
 
 	var product: Product?
 
-	lazy var currencyFormatter: NSNumberFormatter = {
-		let formatter = NSNumberFormatter()
-		formatter.numberStyle = .CurrencyStyle
+	lazy var currencyFormatter: NumberFormatter = {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .currency
 		return formatter
 	}()
 
-	lazy var decimalFormatter: NSNumberFormatter = {
-		let formatter = NSNumberFormatter()
-		formatter.numberStyle = .DecimalStyle
+	lazy var decimalFormatter: NumberFormatter = {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .decimal
 		formatter.minimumIntegerDigits = 1
 		formatter.maximumFractionDigits = 2
 		formatter.minimumFractionDigits = 2
@@ -44,8 +44,8 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
         
         let keyboardDoneButtonView = UIToolbar()
         keyboardDoneButtonView.sizeToFit()
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(dismissKeyboard))
-        let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         keyboardDoneButtonView.items = [flexibleWidth,doneButton]
         name.inputAccessoryView = keyboardDoneButtonView
@@ -58,10 +58,10 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
 		if let product = product {
 			name.text = product.name
 			sku.text = product.sku
-			pv.text = decimalFormatter.stringFromNumber(product.pv!)
-			bv.text = decimalFormatter.stringFromNumber(product.bv!)
-			retailCost.text = currencyFormatter.stringFromNumber(product.retailCost!)
-			iboCost.text = currencyFormatter.stringFromNumber(product.iboCost!)
+			pv.text = decimalFormatter.string(from: product.pv!)
+			bv.text = decimalFormatter.string(from: product.bv!)
+			retailCost.text = currencyFormatter.string(from: product.retailCost!)
+			iboCost.text = currencyFormatter.string(from: product.iboCost!)
             title = "Edit Product"
 		}
 	}
@@ -72,18 +72,18 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
 	}
 
 	func showInvalidError() {
-		let alert = UIAlertController(title: "Invalid Entry", message: "Enter a valid value.", preferredStyle: .Alert)
-		alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-		presentViewController(alert, animated: true, completion: nil)
+		let alert = UIAlertController(title: "Invalid Entry", message: "Enter a valid value.", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+		present(alert, animated: true, completion: nil)
 	}
 
 	func showEmptyError() {
-		let alert = UIAlertController(title: "Invalid Entries", message: "All fields must have a value.", preferredStyle: .Alert)
-		alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-		presentViewController(alert, animated: true, completion: nil)
+		let alert = UIAlertController(title: "Invalid Entries", message: "All fields must have a value.", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+		present(alert, animated: true, completion: nil)
 	}
 
-	func validateNumber(number: NSNumber) -> Bool {
+	func validateNumber(_ number: NSNumber) -> Bool {
 		if number.doubleValue >= 0 {
 			return true
 		} else {
@@ -92,13 +92,13 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
 		}
 	}
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        if let num = decimalFormatter.numberFromString(textField.text!) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let num = decimalFormatter.number(from: textField.text!) {
             if validateNumber(num) {
                 if textField == iboCost || textField == retailCost {
-                    textField.text = currencyFormatter.stringFromNumber(num)
+                    textField.text = currencyFormatter.string(from: num)
                 } else {
-                    textField.text = decimalFormatter.stringFromNumber(num)
+                    textField.text = decimalFormatter.string(from: num)
                 }
             } else {
                 showInvalidError()
@@ -113,29 +113,29 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
 	
 
 	func validateAllEntries() -> Bool {
-		return name.text != "" && sku.text != "" && pv.text != "" && bv.text != "" && retailCost != "" && iboCost != ""
+		return name.text != "" && sku.text != "" && pv.text != "" && bv.text != "" && retailCost.text != "" && iboCost.text != ""
 	}
 
-	@IBAction func save(sender: AnyObject) {
+	@IBAction func save(_ sender: AnyObject) {
 		if validateAllEntries() {
             
             // If we have a custom product edit its values, if we have a standard product create a custom product, and if we have no product create it
             let newProduct: Product
-            if let product = self.product where product.custom!.boolValue  {
+            if let product = self.product, product.custom!.boolValue  {
                 newProduct = product
             } else {
-                newProduct = Product.MR_createEntity()!
+                newProduct = Product.mr_createEntity()!
             }
             
 			newProduct.name = name.text
 			newProduct.sku = sku.text
-			newProduct.pv = NSDecimalNumber(decimal: decimalFormatter.numberFromString(pv.text!)!.decimalValue)
-			newProduct.bv = NSDecimalNumber(decimal: decimalFormatter.numberFromString(bv.text!)!.decimalValue)
-			newProduct.retailCost = NSDecimalNumber(decimal: currencyFormatter.numberFromString(retailCost.text!)!.decimalValue)
-			newProduct.iboCost = NSDecimalNumber(decimal: currencyFormatter.numberFromString(iboCost.text!)!.decimalValue)
-            newProduct.custom = NSNumber(bool: true)
-			NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-			navigationController?.popViewControllerAnimated(true)
+			newProduct.pv = NSDecimalNumber(decimal: decimalFormatter.number(from: pv.text!)!.decimalValue)
+			newProduct.bv = NSDecimalNumber(decimal: decimalFormatter.number(from: bv.text!)!.decimalValue)
+			newProduct.retailCost = NSDecimalNumber(decimal: currencyFormatter.number(from: retailCost.text!)!.decimalValue)
+			newProduct.iboCost = NSDecimalNumber(decimal: currencyFormatter.number(from: iboCost.text!)!.decimalValue)
+            newProduct.custom = NSNumber(value: true as Bool)
+			NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+			_ = navigationController?.popViewController(animated: true)
 
 		} else {
 			showEmptyError()

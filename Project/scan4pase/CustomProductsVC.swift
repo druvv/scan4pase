@@ -29,11 +29,11 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
         
-        products = Product.MR_findByAttribute("custom", withValue: false) as! [Product]
-        customProducts = Product.MR_findByAttribute("custom", withValue: true) as! [Product]
+        products = Product.mr_find(byAttribute: "custom", withValue: false) as! [Product]
+        customProducts = Product.mr_find(byAttribute: "custom", withValue: true) as! [Product]
         
-        let editButton = editButtonItem()
-        editButton.tintColor = UIColor.whiteColor()
+        let editButton = editButtonItem
+        editButton.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItem = editButton
     }
     
@@ -42,16 +42,16 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        customProducts = Product.MR_findByAttribute("custom", withValue: true) as! [Product]
-        tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0,2)), withRowAnimation: .Automatic)
+        customProducts = Product.mr_find(byAttribute: "custom", withValue: true) as! [Product]
+        tableView.reloadSections(IndexSet(integersIn: NSMakeRange(0,2).toRange()!), with: .automatic)
     }
     
     // MARK: - Table view data source
     
-    func filterContentForSearchText(searchText: String) {
-        var words = searchText.componentsSeparatedByString(" ")
+    func filterContentForSearchText(_ searchText: String) {
+        var words = searchText.components(separatedBy: " ")
         
         words = words.filter{$0 != ""}
         
@@ -60,22 +60,22 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
             let predicate = NSPredicate(format: "name CONTAINS[c] %@", argumentArray: [word])
             namePredicates.append(predicate)
         }
-        let compoundNamePredicate = NSCompoundPredicate(type: .AndPredicateType, subpredicates: namePredicates)
+        let compoundNamePredicate = NSCompoundPredicate(type: .and, subpredicates: namePredicates)
         
         let skuPredicate = NSPredicate(format: "sku CONTAINS[c] %@", argumentArray: [searchText])
         
-        filteredProducts = products.filter{compoundNamePredicate.evaluateWithObject($0) || skuPredicate.evaluateWithObject($0)}
-        filteredCustomProducts = customProducts.filter{compoundNamePredicate.evaluateWithObject($0) || skuPredicate.evaluateWithObject($0)}
+        filteredProducts = products.filter{compoundNamePredicate.evaluate(with: $0) || skuPredicate.evaluate(with: $0)}
+        filteredCustomProducts = customProducts.filter{compoundNamePredicate.evaluate(with: $0) || skuPredicate.evaluate(with: $0)}
         
         
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
         tableView.reloadData()
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         resignFirstResponder()
         tableView.reloadData()
     }
@@ -84,31 +84,31 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
         searchController.view.superview?.removeFromSuperview()
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 84
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if (section == 0) {return "Custom Items"}
         if (section == 1) {return "Standard Items"}
         return ""
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if  section == 0 {
-            if searchController.active && searchController.searchBar.text != "" {
+            if searchController.isActive && searchController.searchBar.text != "" {
                 return filteredCustomProducts.count
             }
             return customProducts.count
         }
         
         if section == 1 {
-            if searchController.active && searchController.searchBar.text != "" {
+            if searchController.isActive && searchController.searchBar.text != "" {
                 return filteredProducts.count
             }
             return products.count
@@ -117,21 +117,21 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
         return 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("customProductCell", forIndexPath: indexPath) as! ProductCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customProductCell", for: indexPath) as! ProductCell
         
         
         // Configure the cell...
         let currentProducts: [Product]?
         if (indexPath.section == 0) {
-            if (searchController.active && searchController.searchBar.text != "") {
+            if (searchController.isActive && searchController.searchBar.text != "") {
                 currentProducts = filteredCustomProducts
             } else {
                 currentProducts = customProducts
             }
             
         } else {
-            if (searchController.active && searchController.searchBar.text != "") {
+            if (searchController.isActive && searchController.searchBar.text != "") {
                 currentProducts = filteredProducts
             } else {
                 currentProducts = products
@@ -146,53 +146,53 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
         return UITableViewCell()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            if (searchController.active && searchController.searchBar.text != "") {
+            if (searchController.isActive && searchController.searchBar.text != "") {
                 selectedProduct = filteredCustomProducts[indexPath.row]
             } else {
                 selectedProduct = customProducts[indexPath.row]
             }
             
         } else {
-            if (searchController.active && searchController.searchBar.text != "") {
+            if (searchController.isActive && searchController.searchBar.text != "") {
                 selectedProduct = filteredProducts[indexPath.row]
             } else {
                 selectedProduct = products[indexPath.row]
             }
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        performSegueWithIdentifier("editProduct", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "editProduct", sender: nil)
         
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 0
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             let currentProduct: Product
-            if (searchController.active && searchController.searchBar.text != "") {
+            if (searchController.isActive && searchController.searchBar.text != "") {
                 currentProduct = filteredCustomProducts[indexPath.row]
-                filteredCustomProducts.removeAtIndex(indexPath.row)
+                filteredCustomProducts.remove(at: indexPath.row)
             } else {
                 currentProduct = customProducts[indexPath.row]
-                customProducts.removeAtIndex(indexPath.row)
+                customProducts.remove(at: indexPath.row)
             }
-            currentProduct.MR_deleteEntity()
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            currentProduct.mr_deleteEntity()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
         if segue.identifier == "editProduct" {
             if let product = selectedProduct {
-                let editVC = segue.destinationViewController as! EditProductVC
+                let editVC = segue.destination as! EditProductVC
                 editVC.product = product
                 selectedProduct = nil
             }

@@ -53,6 +53,7 @@
 		FC2CA0651D2B4D4900839E4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC2CA0681D2B4D4900839E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC2CA06A1D2B4D4900839E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC41AB391E12F82900CF5A90 /* scan4pase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scan4pase.entitlements; sourceTree = "<group>"; };
 		FC4F38D91D2B89B600751ADC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		FC4F38DB1D2B8B9700751ADC /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC4F38DC1D2B8B9700751ADC /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 				FC2CA0671D2B4D4900839E4E /* LaunchScreen.storyboard */,
 				FC2CA06A1D2B4D4900839E4E /* Info.plist */,
 				FC1F383A1D2C1E75001CDF96 /* GoogleService-Info.plist */,
+				FC41AB391E12F82900CF5A90 /* scan4pase.entitlements */,
 			);
 			path = scan4pase;
 			sourceTree = "<group>";
@@ -486,7 +488,9 @@
 			baseConfigurationReference = 9B7F9060A460BED11A3B9D49 /* Pods-scan4pase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = scan4pase/scan4pase.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = scan4pase/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -502,6 +506,7 @@
 			baseConfigurationReference = E07C9F6564252996406F30DD /* Pods-scan4pase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = scan4pase/scan4pase.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = scan4pase/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;

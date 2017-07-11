@@ -23,15 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Start the Magic
         MagicalRecord.setLoggingLevel(.warn)
         MagicalRecord.setupAutoMigratingCoreDataStack()
-        FIRApp.configure()
+        FirebaseApp.configure()
         Fabric.with([Crashlytics.self])
 
         let appDefaults = ["taxPercentage": NSNumber(value: 6 as Int32), "creditCardFeePercentage": NSNumber(value: 3 as Int32)]
         UserDefaults.standard.register(defaults: appDefaults)
 
         // Tab Bar Appearance
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.gray], for: UIControlState())
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 43, green: 130, blue: 201)], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.gray], for: UIControlState())
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(red: 43, green: 130, blue: 201)], for: .selected)
 
         registerForPushNotifications(application)
 
@@ -64,16 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
-        var tokenString = ""
-
-        for i in 0..<deviceToken.count {
-            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
-        }
-
-        //Tricky line
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
-        print("Device Token:", tokenString)
+        Messaging.messaging().apnsToken = deviceToken
+        print("Device Token: \(deviceToken)")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

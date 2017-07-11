@@ -46,10 +46,10 @@ class InvoiceVC: UIViewController {
         paragraphRight.alignment = .right
         // Styles
         let fontSize: CGFloat = 15
-        let bold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor.black]
-        let boldBlue = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor(red: 43, green: 130, blue: 201)]
-        let normal = [NSFontAttributeName: UIFont.systemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor.black]
-        let normalRight = [NSFontAttributeName: UIFont.systemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: paragraphRight]
+        let bold = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: fontSize), NSAttributedStringKey.foregroundColor: UIColor.black]
+        let boldBlue = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: fontSize), NSAttributedStringKey.foregroundColor: UIColor(red: 43, green: 130, blue: 201)]
+        let normal = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: fontSize), NSAttributedStringKey.foregroundColor: UIColor.black]
+        let normalRight = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: fontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: paragraphRight]
 
         subject = "scan4pase - Invoice - \(name)"
 

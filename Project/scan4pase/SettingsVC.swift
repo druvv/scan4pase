@@ -16,7 +16,7 @@ class SettingsVC: UITableViewController, UITextFieldDelegate {
 		let formatter = NumberFormatter()
 		formatter.numberStyle = .decimal
 		formatter.minimumIntegerDigits = 1
-		formatter.maximumFractionDigits = 2
+		formatter.maximumFractionDigits = 3
 		formatter.minimumFractionDigits = 2
 		return formatter
 	}()

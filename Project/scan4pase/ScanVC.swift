@@ -28,28 +28,34 @@ class ScanVC: UIViewController {
         scanner.allowTapToFocus = true
         MTBBarcodeScanner.requestCameraPermission { success in
             if success {
-                self.scanner.startScanning(resultBlock: { [unowned self] codes in
-                    if let code = codes?.first as? AVMetadataMachineReadableCodeObject {
-                        self.scanner.freezeCapture()
-                        if Product.mr_findFirst(with: NSPredicate(format: "sku == %@ AND custom != TRUE", argumentArray: [code.stringValue])) != nil {
-                            self.dismiss(animated: true, completion: {
-                                self.searchDelegate.selectProduct(forSKU: code.stringValue)
-                            })
-                        } else {
-                            let alert = UIAlertController(title: "Invalid SKU", message: "A product was not found for SKU: \(code.stringValue)", preferredStyle: .alert)
-                            let continueScanning = UIAlertAction(title: "Continue", style: .default, handler: { _ in
-                                self.scanner.unfreezeCapture()
-                            })
-                            let stopScanning = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                                self.scanner.stopScanning()
-                                self.dismiss(animated: true, completion: nil)
-                            })
-                            alert.addAction(continueScanning)
-                            alert.addAction(stopScanning)
-                            self.present(alert, animated: true, completion: nil)
+                do {
+                    try self.scanner.startScanning { codes in
+                        if let code = codes?.first {
+                            self.scanner.freezeCapture()
+                            if Product.mr_findFirst(with: NSPredicate(format: "sku == %@ AND custom != TRUE", argumentArray: [code.stringValue!])) != nil {
+                                self.dismiss(animated: true, completion: {
+                                    self.searchDelegate.selectProduct(forSKU: code.stringValue!)
+                                })
+                            } else {
+                                let alert = UIAlertController(title: "Invalid SKU", message: "A product was not found for SKU: \(code.stringValue!)", preferredStyle: .alert)
+                                let continueScanning = UIAlertAction(title: "Continue", style: .default, handler: { _ in
+                                    self.scanner.unfreezeCapture()
+                                })
+                                let stopScanning = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                                    self.scanner.stopScanning()
+                                    self.dismiss(animated: true, completion: nil)
+                                })
+                                alert.addAction(continueScanning)
+                                alert.addAction(stopScanning)
+                                self.present(alert, animated: true, completion: nil)
+                            }
                         }
                     }
-                }, error: nil)
+                } catch {
+                    let alert = UIAlertController(title: "Failed to open the camera.", message: "Try restarting the application.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
             } else {
                 self.camDenied()
             }

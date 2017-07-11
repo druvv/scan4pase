@@ -16,7 +16,7 @@ class ProductService {
 		let documentsDirectory = paths[0]
 		let filePath = documentsDirectory + "/products.csv"
 
-		let storage = FIRStorage.storage()
+        let storage = Storage.storage()
 		let storageRef = storage.reference(forURL: "gs://project-2924719563810163534.appspot.com/")
 		let fileRef = storageRef.child("products.csv")
 

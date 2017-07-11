@@ -108,7 +108,7 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 
 	}
 
-	func calculateTotals() {
+    @objc func calculateTotals() {
         resetTotals()
 
 		let roundUP = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
@@ -231,7 +231,7 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
         performSegue(withIdentifier: "selectItem", sender: self)
     }
 
-	func clearCart() {
+    @objc func clearCart() {
 		let alert = UIAlertController(title: "Empty Cart", message: "This will delete all of the products in the cart.", preferredStyle: .actionSheet)
 
 		let delete = UIAlertAction(title: "Delete All", style: .destructive, handler: { _ in

@@ -45,7 +45,8 @@ class CustomProductsVC: UITableViewController, UISearchResultsUpdating {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         customProducts = Product.mr_find(byAttribute: "custom", withValue: true) as! [Product]
-        tableView.reloadSections(IndexSet(integersIn: NSRange(location: 0, length: 2).toRange()!), with: .automatic)
+
+        tableView.reloadSections(IndexSet(integersIn: 0..<2), with: .automatic)
     }
 
     // MARK: - Table view data source

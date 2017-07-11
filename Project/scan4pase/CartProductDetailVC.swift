@@ -19,14 +19,13 @@ class CartProductDetailVC: UIViewController, UITextFieldDelegate {
     fileprivate var cartProduct: CartProduct!
     var edit = false
     var saved = false
-    
+
     enum ValidationError: Error {
         case quantityZero
         case quantityInvalid
         case quantityNone
     }
-    
-    
+
     lazy var formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -35,51 +34,51 @@ class CartProductDetailVC: UIViewController, UITextFieldDelegate {
         formatter.minimumFractionDigits = 0
         return formatter
     }()
-    
+
     let moc = NSManagedObjectContext.mr_default()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        
+
         quantity.delegate = self
-        
+
         if let cartProduct = CartProduct.mr_findFirst(byAttribute: "product", withValue: product, in: moc) {
-            self.cartProduct = cartProduct 
+            self.cartProduct = cartProduct
         } else {
             cartProduct = CartProduct.mr_createEntity(in: moc)
             cartProduct.product = product
         }
-        
+
         hideKeyboardWhenTappedAround()
 
 		// Do any additional setup after loading the view.
         name.text = product.name
-        
+
         if let quantity = cartProduct.quantity {
             self.quantity.text = quantity.stringValue
             if self.quantity.text == "0" {
                 self.quantity.text = "1"
             }
         }
-        
+
         if let taxable = cartProduct.taxable {
             self.taxable.selectedSegmentIndex = taxable.boolValue ? 0 : 1
         }
-        
+
         if edit {
             addtoCartButton.setTitle("Save", for: UIControlState())
         }
-        
+
         title = product.sku
-        
+
         let keyboardDoneButtonView = UIToolbar()
         keyboardDoneButtonView.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
         let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        keyboardDoneButtonView.items = [flexibleWidth,doneButton]
+
+        keyboardDoneButtonView.items = [flexibleWidth, doneButton]
         quantity.inputAccessoryView = keyboardDoneButtonView
-        
+
 	}
 
 	@IBAction func addToCart(_ sender: AnyObject) {
@@ -109,7 +108,7 @@ class CartProductDetailVC: UIViewController, UITextFieldDelegate {
 			present(alert, animated: true, completion: nil)
 			return
 		}
-        
+
         cartProduct.quantity = NSDecimalNumber(decimal: formatter.number(from: quantity.text!)!.decimalValue)
 		cartProduct.taxable = NSNumber(value: (taxable.selectedSegmentIndex == 0) as Bool)
 		moc.mr_saveToPersistentStoreAndWait()
@@ -117,22 +116,22 @@ class CartProductDetailVC: UIViewController, UITextFieldDelegate {
         _ = navigationController?.popToRootViewController(animated: true)
 
 	}
-    
-    override func viewWillDisappear(_ animated : Bool) {
+
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        if self.isMovingFromParentViewController && !saved && !edit{
+
+        if self.isMovingFromParentViewController && !saved && !edit {
             cartProduct.mr_deleteEntity()
         }
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 
 	func validateEntries() throws {
-        
+
         if (quantity.text == "") {
             throw ValidationError.quantityNone
         } else if let num = formatter.number(from: quantity.text!) {
@@ -150,15 +149,14 @@ class CartProductDetailVC: UIViewController, UITextFieldDelegate {
             quantity.text = String(num)
         }
     }
-    
+
     @IBAction func decrease(_ sender: AnyObject) {
         if var num = Int(quantity.text!), num - 1 > 0 {
             num -= 1
             quantity.text = String(num)
         }
     }
-    
-    
+
 	@IBAction func cancel(_ sender: AnyObject) {
 		_ = self.navigationController?.popToRootViewController(animated: true)
 	}

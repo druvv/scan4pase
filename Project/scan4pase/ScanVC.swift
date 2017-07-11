@@ -10,11 +10,11 @@ import UIKit
 import MTBBarcodeScanner
 
 class ScanVC: UIViewController {
-    
+
     var searchDelegate: SearchVCDelegate!
-    
+
     @IBOutlet var targetBox: UIView!
-    
+
     lazy var scanner: MTBBarcodeScanner = {
         let scanner = MTBBarcodeScanner(previewView: self.view)
         return scanner!
@@ -61,7 +61,7 @@ class ScanVC: UIViewController {
     @IBAction func toggleFlashlight(_ sender: AnyObject) {
         scanner.toggleTorch()
     }
-    
+
     func camDenied() {
         let settingsURL = UIApplicationOpenSettingsURLString
         let alert = UIAlertController(title: nil, message: "It looks like your privacy settings are preventing us from accessing your camera to do barcode scanning. You can fix this by doing the following:\n\n1. Touch the Go button below to open the Settings app.\n\n2. Touch Privacy.\n\n3. Turn the Camera on.\n\n4. Open this app and try again.", preferredStyle: .alert)
@@ -74,7 +74,6 @@ class ScanVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

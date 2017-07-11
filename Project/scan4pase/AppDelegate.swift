@@ -12,38 +12,35 @@ import Firebase
 import Fabric
 import Crashlytics
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         // Start the Magic
         MagicalRecord.setLoggingLevel(.warn)
         MagicalRecord.setupAutoMigratingCoreDataStack()
         FIRApp.configure()
         Fabric.with([Crashlytics.self])
-        
+
         let appDefaults = ["taxPercentage": NSNumber(value: 6 as Int32), "creditCardFeePercentage": NSNumber(value: 3 as Int32)]
         UserDefaults.standard.register(defaults: appDefaults)
-        
+
         // Tab Bar Appearance
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.gray], for: UIControlState())
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 43, green: 130, blue: 201)], for: .selected)
-        
+
         registerForPushNotifications(application)
-        
-        
+
         return true
     }
-    
+
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         if application.applicationState == .inactive || application.applicationState == .background {
-            
+
         } else {
             let notification = UILocalNotification()
             if let aps = userInfo["aps"] as? [String: AnyObject] {
@@ -53,27 +50,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.presentLocalNotificationNow(notification)
         }
     }
-    
+
     func registerForPushNotifications(_ application: UIApplication) {
         let notificationSettings = UIUserNotificationSettings(
             types: [.badge, .sound, .alert], categories: nil)
         application.registerUserNotificationSettings(notificationSettings)
     }
-    
+
     func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
         if notificationSettings.types != UIUserNotificationType() {
             application.registerForRemoteNotifications()
         }
     }
-    
+
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
         var tokenString = ""
-        
+
         for i in 0..<deviceToken.count {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
-        
+
         //Tricky line
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
         print("Device Token:", tokenString)
@@ -101,6 +98,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
-

@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class SettingsVC: UITableViewController, UITextFieldDelegate {
 	@IBOutlet var taxPercentage: UITextField!
 	@IBOutlet var creditCardFeePercentage: UITextField!

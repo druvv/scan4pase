@@ -176,7 +176,7 @@ extension UIColor {
         let newRed = CGFloat(red)/255
         let newGreen = CGFloat(green)/255
         let newBlue = CGFloat(blue)/255
-        
+
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
 }
@@ -190,4 +190,3 @@ func +(lhs: NSMutableAttributedString, rhs: NSMutableAttributedString) -> NSMuta
     returnString.append(rhs)
     return returnString
 }
-

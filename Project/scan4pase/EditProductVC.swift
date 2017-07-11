@@ -36,25 +36,25 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        
+
         pv.delegate = self
         bv.delegate = self
         iboCost.delegate = self
         retailCost.delegate = self
-        
+
         let keyboardDoneButtonView = UIToolbar()
         keyboardDoneButtonView.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
         let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        keyboardDoneButtonView.items = [flexibleWidth,doneButton]
+
+        keyboardDoneButtonView.items = [flexibleWidth, doneButton]
         name.inputAccessoryView = keyboardDoneButtonView
         sku.inputAccessoryView = keyboardDoneButtonView
         pv.inputAccessoryView = keyboardDoneButtonView
         bv.inputAccessoryView = keyboardDoneButtonView
         iboCost.inputAccessoryView = keyboardDoneButtonView
         retailCost.inputAccessoryView = keyboardDoneButtonView
-        
+
 		if let product = product {
 			name.text = product.name
 			sku.text = product.sku
@@ -91,7 +91,7 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
 			return false
 		}
 	}
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let num = decimalFormatter.number(from: textField.text!) {
             if validateNumber(num) {
@@ -110,23 +110,21 @@ class EditProductVC: UITableViewController, UITextFieldDelegate {
         }
     }
 
-	
-
 	func validateAllEntries() -> Bool {
 		return name.text != "" && sku.text != "" && pv.text != "" && bv.text != "" && retailCost.text != "" && iboCost.text != ""
 	}
 
 	@IBAction func save(_ sender: AnyObject) {
 		if validateAllEntries() {
-            
+
             // If we have a custom product edit its values, if we have a standard product create a custom product, and if we have no product create it
             let newProduct: Product
-            if let product = self.product, product.custom!.boolValue  {
+            if let product = self.product, product.custom!.boolValue {
                 newProduct = product
             } else {
                 newProduct = Product.mr_createEntity()!
             }
-            
+
 			newProduct.name = name.text
 			newProduct.sku = sku.text
 			newProduct.pv = NSDecimalNumber(decimal: decimalFormatter.number(from: pv.text!)!.decimalValue)

@@ -15,7 +15,7 @@ class CartCell: UITableViewCell {
     @IBOutlet var retailCost: UILabel!
     @IBOutlet var iboCost: UILabel!
     @IBOutlet var quantity: UILabel!
-    
+
     func load(withCartProduct cartProduct: CartProduct) {
         let product = cartProduct.product!
         let formatter = NumberFormatter()

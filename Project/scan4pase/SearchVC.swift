@@ -19,23 +19,22 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
     var filteredCustomProducts: [Product]?
     var filteredProducts: [Product]?
     let searchController = UISearchController(searchResultsController: nil)
-    
+
     var selectedProduct: Product?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         products = Product.mr_find(byAttribute: "custom", withValue: false) as? [Product]
         customProducts = Product.mr_find(byAttribute: "custom", withValue: true) as? [Product]
-        
+
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         searchController.searchBar.scopeButtonTitles = []
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
-        
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,45 +43,44 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
     }
 
     // MARK: - Table view data source
-    
+
     func selectProduct(forSKU sku: String) {
         if let product = Product.mr_findFirst(with: NSPredicate(format: "sku == %@ AND custom != TRUE", argumentArray: [sku])) {
             selectedProduct = product
             performSegue(withIdentifier: "searchToDetail", sender: nil)
         }
     }
-    
+
     func filterContentForSearchText(_ searchText: String) {
         var words = searchText.components(separatedBy: " ")
-        
-        words = words.filter{$0 != ""}
-        
+
+        words = words.filter {$0 != ""}
+
         var namePredicates: [NSPredicate] = []
         for word in words {
             let predicate = NSPredicate(format: "name CONTAINS[c] %@", argumentArray: [word])
             namePredicates.append(predicate)
         }
         let compoundNamePredicate = NSCompoundPredicate(type: .and, subpredicates: namePredicates)
-        
+
         let skuPredicate = NSPredicate(format: "sku CONTAINS[c] %@", argumentArray: [searchText])
-        
-        filteredProducts = products?.filter{compoundNamePredicate.evaluate(with: $0) || skuPredicate.evaluate(with: $0)}
-        filteredCustomProducts = customProducts?.filter{compoundNamePredicate.evaluate(with: $0) || skuPredicate.evaluate(with: $0)}
-        
-        
+
+        filteredProducts = products?.filter {compoundNamePredicate.evaluate(with: $0) || skuPredicate.evaluate(with: $0)}
+        filteredCustomProducts = customProducts?.filter {compoundNamePredicate.evaluate(with: $0) || skuPredicate.evaluate(with: $0)}
+
     }
-    
+
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
         tableView.reloadData()
     }
-    
+
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         resignFirstResponder()
         tableView.reloadData()
     }
-    
-    deinit{
+
+    deinit {
         searchController.view.superview?.removeFromSuperview()
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -94,7 +92,7 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 84
     }
@@ -107,20 +105,19 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
             }
             return customProducts!.count
         }
-        
+
         if section == 1 {
             if searchController.isActive && searchController.searchBar.text != "" {
                 return filteredProducts!.count
             }
             return products!.count
         }
-        
+
         return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductCell
-        
 
         // Configure the cell...
         let currentProducts: [Product]?
@@ -130,7 +127,7 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
             } else {
                 currentProducts = customProducts
             }
-            
+
         } else {
             if (searchController.isActive && searchController.searchBar.text != "") {
                 currentProducts = filteredProducts
@@ -138,7 +135,7 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
                 currentProducts = products
             }
         }
-        
+
         if let product = currentProducts?[indexPath.row] {
             cell.load(withProduct: product)
             return cell
@@ -146,7 +143,7 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
 
         return UITableViewCell()
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             if (searchController.isActive && searchController.searchBar.text != "") {
@@ -154,7 +151,7 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
             } else {
                 selectedProduct = customProducts![indexPath.row]
             }
-            
+
         } else {
             if (searchController.isActive && searchController.searchBar.text != "") {
                 selectedProduct = filteredProducts![indexPath.row]
@@ -164,9 +161,9 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
         }
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "searchToDetail", sender: nil)
-        
+
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "searchToDetail") {
             let detailVC = segue.destination as! CartProductDetailVC
@@ -175,9 +172,8 @@ class SearchVC: UITableViewController, UISearchResultsUpdating, SearchVCDelegate
             let scanVC = segue.destination as! ScanVC
             scanVC.searchDelegate = self
         }
-        
+
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
-
 
 }

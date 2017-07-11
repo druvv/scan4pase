@@ -31,26 +31,26 @@ class ConfigurationVC: StaticDataTableViewController {
 	@IBOutlet var otherMethodName: UITextField!
 
     @IBOutlet var finshButton: UIBarButtonItem!
-    
+
     var cartDelegate: CartVCDelegate!
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        
+
         tableView.delegate = self
         tableView.dataSource = self
-        
+
 		cell(methodCell, setHidden: true)
 		cell(checkNumberCell, setHidden: true)
 		cell(otherMethodNameCell, setHidden: true)
         hideSectionsWithHiddenRows = true
 		reloadData(animated: false)
-        
+
         let keyboardDoneButtonView = UIToolbar()
         keyboardDoneButtonView.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
         let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        keyboardDoneButtonView.items = [flexibleWidth,doneButton]
+
+        keyboardDoneButtonView.items = [flexibleWidth, doneButton]
         name.inputAccessoryView = keyboardDoneButtonView
         iboNumber.inputAccessoryView = keyboardDoneButtonView
         checkNumber.inputAccessoryView = keyboardDoneButtonView
@@ -61,13 +61,13 @@ class ConfigurationVC: StaticDataTableViewController {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
-    
+
     func entriesValid() -> Bool {
         var entriesValid = true
-        
+
         entriesValid = name.text != ""
         entriesValid = iboNumber.text != ""
-        
+
         if paid.selectedSegmentIndex == 0 {
             switch method.selectedSegmentIndex {
             case 1:
@@ -78,10 +78,9 @@ class ConfigurationVC: StaticDataTableViewController {
                 break
             }
         }
-        
+
         return entriesValid
     }
-
 
 	func hideOrShowDependingOnMethod() {
 		switch method.selectedSegmentIndex {
@@ -99,7 +98,7 @@ class ConfigurationVC: StaticDataTableViewController {
 			hideAllMethodCells()
 		}
 	}
-    
+
     func hideAllPaymentCells() {
         cell(checkNumberCell, setHidden: true)
         cell(otherMethodNameCell, setHidden: true)
@@ -119,20 +118,20 @@ class ConfigurationVC: StaticDataTableViewController {
         } else {
             hideAllPaymentCells()
         }
-        
+
         reloadData(animated: false)
-        
+
 	}
 
 	@IBAction func methodChanged(_ sender: AnyObject) {
         hideOrShowDependingOnMethod()
         reloadData(animated: false)
 	}
-    
+
     @IBAction func somethingChanged(_ sender: AnyObject) {
         finshButton.isEnabled = entriesValid()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "invoice" {
             let invoiceVC = segue.destination as! InvoiceVC
@@ -156,5 +155,5 @@ class ConfigurationVC: StaticDataTableViewController {
             }
         }
     }
-    
+
 }

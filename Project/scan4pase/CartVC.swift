@@ -10,7 +10,7 @@ import UIKit
 import MagicalRecord
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -20,7 +20,6 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     return false
   }
 }
-
 
 protocol CartVCDelegate {
 	var iboCostSubtotal: NSDecimalNumber { get }
@@ -79,7 +78,7 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 	func loadProducts() {
 		startLoadingAnimation()
 		UIApplication.shared.beginIgnoringInteractionEvents()
-		ProductService.importProducts({ successful, error in
+		ProductService.importProducts({ successful, _ in
 			DispatchQueue.main.async(execute: {
 				UIApplication.shared.endIgnoringInteractionEvents()
 				if (!successful) {
@@ -111,7 +110,7 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 
 	func calculateTotals() {
         resetTotals()
-        
+
 		let roundUP = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
 
 		var retailCostTaxTotal: NSDecimalNumber = 0
@@ -227,7 +226,7 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 			navigationItem.rightBarButtonItem = addButton
 		}
 	}
-    
+
     func addProduct() {
         performSegue(withIdentifier: "selectItem", sender: self)
     }

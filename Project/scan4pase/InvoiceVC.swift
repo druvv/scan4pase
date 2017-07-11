@@ -9,7 +9,7 @@
 import UIKit
 
 class InvoiceVC: UIViewController {
-    
+
     @IBOutlet var textview: UITextView!
     var paymentMethod: PaymentMethod = .cash
     var paid: Bool = true
@@ -26,19 +26,19 @@ class InvoiceVC: UIViewController {
 
         // Do any additional setup after loading the view.
         buildText()
-        
+
         let keyboardDoneButtonView = UIToolbar()
         keyboardDoneButtonView.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
         let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        keyboardDoneButtonView.items = [flexibleWidth,doneButton]
+
+        keyboardDoneButtonView.items = [flexibleWidth, doneButton]
         textview.inputAccessoryView = keyboardDoneButtonView
-        
+
     }
-    
+
     func buildText() {
-        
+
         // Justifications Config
         let paragraphCenter = NSMutableParagraphStyle()
         paragraphCenter.alignment = .center
@@ -49,15 +49,15 @@ class InvoiceVC: UIViewController {
         let bold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor.black]
         let boldBlue = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor(red: 43, green: 130, blue: 201)]
         let normal = [NSFontAttributeName: UIFont.systemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor.black]
-        let normalRight = [NSFontAttributeName: UIFont.systemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor.black,  NSParagraphStyleAttributeName: paragraphRight]
-        
+        let normalRight = [NSFontAttributeName: UIFont.systemFont(ofSize: fontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: paragraphRight]
+
         subject = "scan4pase - Invoice - \(name)"
-        
+
         // Identification
         invoiceText += NSMutableAttributedString(string: "Identification\n", attributes: boldBlue)
         invoiceText += NSMutableAttributedString(string: "Payee: ", attributes: bold) + NSMutableAttributedString(string: name + "\n", attributes: normal)
         invoiceText += NSMutableAttributedString(string: "IBO Number: ", attributes: bold) + NSMutableAttributedString(string: iboNumber + "\n", attributes: normal)
-        
+
         // Payment Details
         invoiceText += NSMutableAttributedString(string: "Payment Details\n", attributes: boldBlue)
         invoiceText += NSMutableAttributedString(string: "Paid: ", attributes: bold) + NSMutableAttributedString(string: (paid ? "Yes" : "No") + "\n", attributes: normal)
@@ -75,62 +75,62 @@ class InvoiceVC: UIViewController {
                 invoiceText += NSMutableAttributedString(string: otherMethodName + "\n", attributes:  normal)
             }
         }
-        
+
         // Order Details
         let pointFormatter = NumberFormatter()
         pointFormatter.numberStyle = .decimal
         pointFormatter.maximumFractionDigits = 2
         pointFormatter.minimumIntegerDigits = 1
         pointFormatter.minimumFractionDigits = 2
-        
+
         let currencyFormatter = NumberFormatter()
         currencyFormatter.numberStyle = .currency
-        
+
         invoiceText += NSMutableAttributedString(string: "Order Details\n", attributes: boldBlue)
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a EEE MMMM d, yy"
         invoiceText += NSMutableAttributedString(string: "Date: ", attributes: bold)
             + NSMutableAttributedString(string: dateFormatter.string(from: Date()) + "\n", attributes: normal)
-        
-        let pvBVAttributedText = NSMutableAttributedString(string: "PV/BV Total: ",  attributes: bold)
+
+        let pvBVAttributedText = NSMutableAttributedString(string: "PV/BV Total: ", attributes: bold)
         invoiceText += pvBVAttributedText
             + NSMutableAttributedString(string: pointFormatter.string(from: cartDelegate.pvTotal)! + " / " + pointFormatter.string(from: cartDelegate.bvTotal)! + "\n", attributes: normalRight)
-        
+
         let subtotalAttributedText = NSMutableAttributedString(string: "Subtotal (IBO / Retail): ", attributes: bold)
         invoiceText += subtotalAttributedText
-            + NSMutableAttributedString(string: currencyFormatter.string(from: cartDelegate.iboCostSubtotal)! + " / " + currencyFormatter.string(from: cartDelegate.retailCostSubtotal)! + "\n",attributes: normalRight)
-        
+            + NSMutableAttributedString(string: currencyFormatter.string(from: cartDelegate.iboCostSubtotal)! + " / " + currencyFormatter.string(from: cartDelegate.retailCostSubtotal)! + "\n", attributes: normalRight)
+
         let grandTotalAttributedText = NSMutableAttributedString(string: "Grand Total (IBO / Retail): ", attributes: bold)
         invoiceText += grandTotalAttributedText
             + NSMutableAttributedString(string: currencyFormatter.string(from: cartDelegate.iboCostGrandTotal)! + " / " + currencyFormatter.string(from: cartDelegate.retailCostGrandTotal)! + "\n", attributes: normalRight)
-        
+
         if paymentMethod == .creditCard {
             if let tax = UserDefaults.standard.object(forKey: "creditCardFeePercentage") as? NSNumber {
                 var tax = NSDecimalNumber(decimal: tax.decimalValue)
                 tax = tax.multiplying(byPowerOf10: -2)
                 tax = tax.adding(1)
-                
+
                 let roundUP = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
                 let iboGrandTotalWithFee = cartDelegate.iboCostGrandTotal.multiplying(by: tax, withBehavior: roundUP)
                 let retailGrandTotalWithFee = cartDelegate.retailCostGrandTotal.multiplying(by: tax, withBehavior: roundUP)
-                
+
                 let iboGrandTotalWithFeeAttributedText = NSMutableAttributedString(string: "Grand Total w/ CC Fee (IBO / Retail): ", attributes: bold)
                 invoiceText += iboGrandTotalWithFeeAttributedText
                     + NSMutableAttributedString(string: currencyFormatter.string(from: iboGrandTotalWithFee)! + " / " + currencyFormatter.string(from: retailGrandTotalWithFee)! + "\n", attributes: normalRight)
             }
         }
-        
+
         // Purchased Items
         invoiceText += NSMutableAttributedString(string: "Purchased Items (\(cartDelegate.quantityTotal.stringValue))\n", attributes: boldBlue)
-        
+
         if let cartProducts = CartProduct.mr_findAll() as? [CartProduct] {
             for cartProduct in cartProducts {
                 invoiceText += NSMutableAttributedString(string: "\(cartProduct.product!.sku!)\(cartProduct.product!.custom!.boolValue ? " Custom" : "") \(cartProduct.taxable!.boolValue ? "Taxed" : "Not Taxed") (\(cartProduct.quantity!.stringValue))", attributes: boldBlue)
                 invoiceText += NSMutableAttributedString(string: " - \(cartProduct.product!.name!)\n", attributes: normal)
             }
         }
-        
+
         textview.attributedText = invoiceText
     }
     @IBAction func shareInvoice(_ sender: AnyObject) {
@@ -148,7 +148,6 @@ class InvoiceVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

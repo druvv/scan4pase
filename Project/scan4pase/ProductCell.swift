@@ -14,7 +14,7 @@ class ProductCell: UITableViewCell {
     @IBOutlet var pvBV: UILabel!
     @IBOutlet var retailCost: UILabel!
     @IBOutlet var iboCost: UILabel!
-    
+
     func load(withProduct product: Product) {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2

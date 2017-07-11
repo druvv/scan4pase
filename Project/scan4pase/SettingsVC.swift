@@ -8,17 +8,15 @@
 
 import UIKit
 
-
-
 class SettingsVC: UITableViewController, UITextFieldDelegate {
 	@IBOutlet var taxPercentage: UITextField!
 	@IBOutlet var creditCardFeePercentage: UITextField!
 
-	lazy var formatter: NSNumberFormatter = {
-		let formatter = NSNumberFormatter()
-		formatter.numberStyle = .DecimalStyle
+	lazy var formatter: NumberFormatter = {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .decimal
 		formatter.minimumIntegerDigits = 1
-		formatter.maximumFractionDigits = 2
+		formatter.maximumFractionDigits = 3
 		formatter.minimumFractionDigits = 2
 		return formatter
 	}()
@@ -35,18 +33,18 @@ class SettingsVC: UITableViewController, UITextFieldDelegate {
 		tap.cancelsTouchesInView = false
 		tableView.addGestureRecognizer(tap)
 
-		if let num = NSUserDefaults.standardUserDefaults().objectForKey("taxPercentage") as? NSNumber {
-			taxPercentage.text = formatter.stringFromNumber(num)
+		if let num = UserDefaults.standard.object(forKey: "taxPercentage") as? NSNumber {
+			taxPercentage.text = formatter.string(from: num)
 		}
 
-		if let num = NSUserDefaults.standardUserDefaults().objectForKey("creditCardFeePercentage") as? NSNumber {
-			creditCardFeePercentage.text = formatter.stringFromNumber(num)
+		if let num = UserDefaults.standard.object(forKey: "creditCardFeePercentage") as? NSNumber {
+			creditCardFeePercentage.text = formatter.string(from: num)
 		}
 
 		let keyboardDoneButtonView = UIToolbar()
 		keyboardDoneButtonView.sizeToFit()
-		let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(dismissKeyboard))
-		let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+		let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+		let flexibleWidth = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
 		keyboardDoneButtonView.items = [flexibleWidth, doneButton]
 		taxPercentage.inputAccessoryView = keyboardDoneButtonView
@@ -54,23 +52,23 @@ class SettingsVC: UITableViewController, UITextFieldDelegate {
 	}
 
 	func showError() {
-		let alert = UIAlertController(title: "Error!", message: "Invalid Entry!", preferredStyle: .Alert)
-		alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-		presentViewController(alert, animated: true, completion: nil)
+		let alert = UIAlertController(title: "Error!", message: "Invalid Entry!", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+		present(alert, animated: true, completion: nil)
 	}
 
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
 		return true
 	}
 
-	func textFieldDidEndEditing(textField: UITextField) {
+	func textFieldDidEndEditing(_ textField: UITextField) {
 		if (textField == taxPercentage) {
-			if let num = formatter.numberFromString(textField.text!) {
+			if let num = formatter.number(from: textField.text!) {
 				if num.doubleValue < 100 && num.doubleValue > 0 {
-					NSUserDefaults.standardUserDefaults().setObject(num, forKey: "taxPercentage")
-					textField.text = formatter.stringFromNumber(num)
-					NSNotificationCenter.defaultCenter().postNotificationName("settingsUpdated", object: self)
+					UserDefaults.standard.set(num, forKey: "taxPercentage")
+					textField.text = formatter.string(from: num)
+					NotificationCenter.default.post(name: Notification.Name(rawValue: "settingsUpdated"), object: self)
 				} else {
 					showError()
 				}
@@ -78,10 +76,10 @@ class SettingsVC: UITableViewController, UITextFieldDelegate {
 				showError()
 			}
         } else {
-            if let num = formatter.numberFromString(textField.text!) {
+            if let num = formatter.number(from: textField.text!) {
                 if num.doubleValue < 100 && num.doubleValue > 0 {
-                    NSUserDefaults.standardUserDefaults().setObject(num, forKey: "creditCardFeePercentage")
-                    textField.text = formatter.stringFromNumber(num)
+                    UserDefaults.standard.set(num, forKey: "creditCardFeePercentage")
+                    textField.text = formatter.string(from: num)
                 } else {
                     showError()
                 }

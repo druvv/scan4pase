@@ -8,6 +8,18 @@
 
 import UIKit
 import MagicalRecord
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
 protocol CartVCDelegate {
 	var iboCostSubtotal: NSDecimalNumber { get }
@@ -54,28 +66,28 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 		// Do any additional setup after loading the view.
 		loadProducts()
 
-		navigationItem.leftBarButtonItem = editButtonItem()
+		navigationItem.leftBarButtonItem = editButtonItem
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(calculateTotals), name: "settingsUpdated", object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(calculateTotals), name: NSNotification.Name(rawValue: "settingsUpdated"), object: nil)
 	}
 
 	deinit {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 
 	func loadProducts() {
 		startLoadingAnimation()
-		UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-		ProductService.importProducts({ successful, error in
-			dispatch_async(dispatch_get_main_queue(), {
-				UIApplication.sharedApplication().endIgnoringInteractionEvents()
+		UIApplication.shared.beginIgnoringInteractionEvents()
+		ProductService.importProducts({ successful, _ in
+			DispatchQueue.main.async(execute: {
+				UIApplication.shared.endIgnoringInteractionEvents()
 				if (!successful) {
 					self.activitiyIndicator.stopAnimating()
-					let alert = UIAlertController(title: "Error!", message: "We failed to load the products. Check your connection and try again.", preferredStyle: .Alert)
-					alert.addAction(UIAlertAction(title: "Retry", style: .Default, handler: { [unowned self] _ in
+					let alert = UIAlertController(title: "Error!", message: "We failed to load the products. Check your connection and try again.", preferredStyle: .alert)
+					alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [unowned self] _ in
 						self.loadProducts()
 						}))
-					self.presentViewController(alert, animated: true, completion: nil)
+					self.present(alert, animated: true, completion: nil)
 				} else {
 					self.stopLoadingAnimation()
 					self.reloadCart()
@@ -96,10 +108,10 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 
 	}
 
-	func calculateTotals() {
+    @objc func calculateTotals() {
         resetTotals()
-        
-		let roundUP = NSDecimalNumberHandler(roundingMode: .RoundPlain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+
+		let roundUP = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
 
 		var retailCostTaxTotal: NSDecimalNumber = 0
 
@@ -107,45 +119,45 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 			let product = cartProduct.product!
 			let quantity = NSDecimalNumber(decimal: cartProduct.quantity!.decimalValue)
 
-			quantityTotal = quantityTotal.decimalNumberByAdding(quantity)
+			quantityTotal = quantityTotal.adding(quantity)
 
-			let qPV = product.pv!.decimalNumberByMultiplyingBy(quantity, withBehavior: roundUP)
-			let qBV = product.bv!.decimalNumberByMultiplyingBy(quantity, withBehavior: roundUP)
-			let qRetailCost = product.retailCost!.decimalNumberByMultiplyingBy(quantity, withBehavior: roundUP)
-			let qIboCost = product.iboCost!.decimalNumberByMultiplyingBy(quantity, withBehavior: roundUP)
+			let qPV = product.pv!.multiplying(by: quantity, withBehavior: roundUP)
+			let qBV = product.bv!.multiplying(by: quantity, withBehavior: roundUP)
+			let qRetailCost = product.retailCost!.multiplying(by: quantity, withBehavior: roundUP)
+			let qIboCost = product.iboCost!.multiplying(by: quantity, withBehavior: roundUP)
 
-			if let taxPercentage = NSUserDefaults.standardUserDefaults().objectForKey("taxPercentage") as? NSNumber where cartProduct.taxable!.boolValue {
+			if let taxPercentage = UserDefaults.standard.object(forKey: "taxPercentage") as? NSNumber, cartProduct.taxable!.boolValue {
 				var taxPercentage = NSDecimalNumber(decimal: taxPercentage.decimalValue)
-				taxPercentage = taxPercentage.decimalNumberByMultiplyingByPowerOf10(-2, withBehavior: roundUP)
+				taxPercentage = taxPercentage.multiplying(byPowerOf10: -2, withBehavior: roundUP)
 
-				let retailTax = qRetailCost.decimalNumberByMultiplyingBy(taxPercentage, withBehavior: roundUP)
+				let retailTax = qRetailCost.multiplying(by: taxPercentage, withBehavior: roundUP)
 
-				retailCostTaxTotal = retailCostTaxTotal.decimalNumberByAdding(retailTax, withBehavior: roundUP)
+				retailCostTaxTotal = retailCostTaxTotal.adding(retailTax, withBehavior: roundUP)
 			}
 
-			pvTotal = pvTotal.decimalNumberByAdding(qPV, withBehavior: roundUP)
-			bvTotal = bvTotal.decimalNumberByAdding(qBV, withBehavior: roundUP)
-			retailCostSubtotal = retailCostSubtotal.decimalNumberByAdding(qRetailCost, withBehavior: roundUP)
-			iboCostSubtotal = iboCostSubtotal.decimalNumberByAdding(qIboCost, withBehavior: roundUP)
+			pvTotal = pvTotal.adding(qPV, withBehavior: roundUP)
+			bvTotal = bvTotal.adding(qBV, withBehavior: roundUP)
+			retailCostSubtotal = retailCostSubtotal.adding(qRetailCost, withBehavior: roundUP)
+			iboCostSubtotal = iboCostSubtotal.adding(qIboCost, withBehavior: roundUP)
 		}
 
-		retailCostGrandTotal = retailCostSubtotal.decimalNumberByAdding(retailCostTaxTotal, withBehavior: roundUP)
-		iboCostGrandTotal = iboCostSubtotal.decimalNumberByAdding(retailCostTaxTotal, withBehavior: roundUP)
+		retailCostGrandTotal = retailCostSubtotal.adding(retailCostTaxTotal, withBehavior: roundUP)
+		iboCostGrandTotal = iboCostSubtotal.adding(retailCostTaxTotal, withBehavior: roundUP)
 
 		navigationController?.navigationBar.topItem?.title = "Cart(\(quantityTotal.stringValue))"
 
-		UIView.animateWithDuration(0.3, animations: {
-			var formatter = NSNumberFormatter()
-			formatter.numberStyle = .CurrencyStyle
+		UIView.animate(withDuration: 0.3, animations: {
+			var formatter = NumberFormatter()
+			formatter.numberStyle = .currency
 
-			self.subtotal.text = formatter.stringFromNumber(self.iboCostSubtotal)! + " / " + formatter.stringFromNumber(self.retailCostSubtotal)!
-			self.grandTotal.text = formatter.stringFromNumber(self.iboCostGrandTotal)! + " / " + formatter.stringFromNumber(self.retailCostGrandTotal)!
-			formatter = NSNumberFormatter()
-			formatter.numberStyle = .DecimalStyle
+			self.subtotal.text = formatter.string(from: self.iboCostSubtotal)! + " / " + formatter.string(from: self.retailCostSubtotal)!
+			self.grandTotal.text = formatter.string(from: self.iboCostGrandTotal)! + " / " + formatter.string(from: self.retailCostGrandTotal)!
+			formatter = NumberFormatter()
+			formatter.numberStyle = .decimal
 			formatter.minimumIntegerDigits = 1
 			formatter.maximumFractionDigits = 2
 			formatter.minimumFractionDigits = 2
-			self.pvBVTotal.text = formatter.stringFromNumber(self.pvTotal)! + " / " + formatter.stringFromNumber(self.bvTotal)!
+			self.pvBVTotal.text = formatter.string(from: self.pvTotal)! + " / " + formatter.string(from: self.bvTotal)!
 		})
 	}
 
@@ -155,21 +167,21 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 	}
 
 	func reloadCart() {
-		self.cartProducts = CartProduct.MR_findAll() as! [CartProduct]
-		cartProducts.sortInPlace({ $0.product!.sku < $1.product!.sku })
+		self.cartProducts = CartProduct.mr_findAll() as! [CartProduct]
+		cartProducts.sort(by: { $0.product!.sku < $1.product!.sku })
 		calculateTotals()
-		cart.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+		cart.reloadSections(IndexSet(integer: 0), with: .automatic)
 	}
 
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		reloadCart()
 	}
 
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 84
 	}
 
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		if cartProducts.count == 0 {
 			showEmptyCart()
 			return 1
@@ -178,19 +190,19 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 		return 1
 	}
 
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return cartProducts.count
 	}
 
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-		if let cell = tableView.dequeueReusableCellWithIdentifier("cartCell") as? CartCell {
+		if let cell = tableView.dequeueReusableCell(withIdentifier: "cartCell") as? CartCell {
 			let cartProduct = cartProducts[indexPath.row]
 			if cartProduct.product != nil {
 				cell.load(withCartProduct: cartProduct)
 			} else {
-				cartProduct.MR_deleteEntity()
-				NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+				cartProduct.mr_deleteEntity()
+				NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
 			}
 			return cell
 		}
@@ -199,79 +211,79 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 
 	}
 
-	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		return true
 	}
 
-	override func setEditing(editing: Bool, animated: Bool) {
+	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
 		cart.setEditing(editing, animated: true)
 
-		if cart.editing {
-			let emptyButton = UIBarButtonItem(title: "Empty Cart", style: .Plain, target: self, action: #selector(clearCart))
+		if cart.isEditing {
+			let emptyButton = UIBarButtonItem(title: "Empty Cart", style: .plain, target: self, action: #selector(clearCart))
 			navigationItem.rightBarButtonItem = emptyButton
 		} else {
 			navigationItem.rightBarButtonItem = addButton
 		}
 	}
-    
+
     func addProduct() {
-        performSegueWithIdentifier("selectItem", sender: self)
+        performSegue(withIdentifier: "selectItem", sender: self)
     }
 
-	func clearCart() {
-		let alert = UIAlertController(title: "Empty Cart", message: "This will delete all of the products in the cart.", preferredStyle: .ActionSheet)
+    @objc func clearCart() {
+		let alert = UIAlertController(title: "Empty Cart", message: "This will delete all of the products in the cart.", preferredStyle: .actionSheet)
 
-		let delete = UIAlertAction(title: "Delete All", style: .Destructive, handler: { _ in
+		let delete = UIAlertAction(title: "Delete All", style: .destructive, handler: { _ in
 			for cartProduct in self.cartProducts {
 				self.cartProducts.removeObject(cartProduct)
-				cartProduct.MR_deleteEntity()
+				cartProduct.mr_deleteEntity()
 			}
-			NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+			NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
 			self.reloadCart()
 			self.setEditing(false, animated: false)
 		})
-		let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		alert.addAction(delete)
 		alert.addAction(cancel)
-		presentViewController(alert, animated: true, completion: nil)
+		present(alert, animated: true, completion: nil)
 	}
 
-	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-		if (editingStyle == UITableViewCellEditingStyle.Delete) {
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		if (editingStyle == UITableViewCellEditingStyle.delete) {
 			let cartProduct = cartProducts[indexPath.row]
-			cartProducts.removeAtIndex(indexPath.row)
-			cartProduct.MR_deleteEntity()
-			NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+			cartProducts.remove(at: indexPath.row)
+			cartProduct.mr_deleteEntity()
+			NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
+			tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
 			calculateTotals()
 		}
 	}
 
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		selectedCartProduct = cartProducts[indexPath.row]
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		performSegueWithIdentifier("editItem", sender: nil)
+		tableView.deselectRow(at: indexPath, animated: true)
+		performSegue(withIdentifier: "editItem", sender: nil)
 	}
 
 	func hide() {
-		pvBVLabel.hidden = true
-		subtotalLabel.hidden = true
-		grandTotalLabel.hidden = true
-		pvBVTotal.hidden = true
-		subtotal.hidden = true
-		grandTotal.hidden = true
-		checkout.hidden = true
+		pvBVLabel.isHidden = true
+		subtotalLabel.isHidden = true
+		grandTotalLabel.isHidden = true
+		pvBVTotal.isHidden = true
+		subtotal.isHidden = true
+		grandTotal.isHidden = true
+		checkout.isHidden = true
 	}
 
 	func show() {
-		pvBVLabel.hidden = false
-		subtotalLabel.hidden = false
-		grandTotalLabel.hidden = false
-		pvBVTotal.hidden = false
-		subtotal.hidden = false
-		grandTotal.hidden = false
-		checkout.hidden = false
+		pvBVLabel.isHidden = false
+		subtotalLabel.isHidden = false
+		grandTotalLabel.isHidden = false
+		pvBVTotal.isHidden = false
+		subtotal.isHidden = false
+		grandTotal.isHidden = false
+		checkout.isHidden = false
 	}
 
 	func showEmptyCart() {
@@ -281,62 +293,62 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 		label.text = "No products in cart."
 		label.textColor = UIColor(red: 43, green: 130, blue: 201)
 		label.numberOfLines = 0
-		label.textAlignment = .Center
-		label.font = UIFont.systemFontOfSize(20)
+		label.textAlignment = .center
+		label.font = UIFont.systemFont(ofSize: 20)
 		label.sizeToFit()
 
 		cart.backgroundView = label
-		cart.separatorStyle = .None
+		cart.separatorStyle = .none
 		hide()
 
 	}
 
 	func hideBackgroundCartView() {
 		cart.backgroundView = nil
-		cart.separatorStyle = .SingleLine
+		cart.separatorStyle = .singleLine
 		show()
 	}
 
 	func startLoadingAnimation() {
 		loadingView.alpha = 1
-		loadingView.hidden = false
+		loadingView.isHidden = false
 		activitiyIndicator.startAnimating()
 	}
 
 	func stopLoadingAnimation() {
 		loadingView.alpha = 1
-		UIView.animateWithDuration(0.3, animations: {
+		UIView.animate(withDuration: 0.3, animations: {
 			self.loadingView.alpha = 0
 		})
-		loadingView.hidden = true
+		loadingView.isHidden = true
 		activitiyIndicator.stopAnimating()
 	}
 
-	@IBAction func checkout(sender: AnyObject) {
+	@IBAction func checkout(_ sender: AnyObject) {
 	}
 
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		let backItem = UIBarButtonItem()
 		backItem.title = "Cart"
 		navigationItem.backBarButtonItem = backItem
 
 		if segue.identifier == "editItem" {
-			let detailVC = segue.destinationViewController as! CartProductDetailVC
+			let detailVC = segue.destination as! CartProductDetailVC
 			detailVC.product = selectedCartProduct?.product
 			detailVC.edit = true
 		} else if segue.identifier == "config" {
-			let configVC = segue.destinationViewController as! ConfigurationVC
+			let configVC = segue.destination as! ConfigurationVC
 			configVC.cartDelegate = self
 		}
 	}
 
-	@IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+	@IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         for cartProduct in self.cartProducts {
             self.cartProducts.removeObject(cartProduct)
-            cartProduct.MR_deleteEntity()
+            cartProduct.mr_deleteEntity()
         }
-        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        NSManagedObjectContext.mr_default().mr_saveToPersistentStoreAndWait()
         reloadCart()
 	}
 

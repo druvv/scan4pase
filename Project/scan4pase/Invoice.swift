@@ -11,21 +11,21 @@ import UIKit
 class Invoice: NSObject, UIActivityItemSource {
     let subject: String
     let message: NSAttributedString
-    
+
     init(subject: String, message: NSAttributedString) {
         self.subject = subject
         self.message = message
     }
-    
-    func activityViewControllerPlaceholderItem(activityViewController: UIActivityViewController) -> AnyObject {
+
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         return message
     }
-    
-    func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
+
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
         return message
     }
-    
-    func activityViewController(activityViewController: UIActivityViewController, subjectForActivityType activityType: String?) -> String {
+
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivityType?) -> String {
         return subject
     }
 }

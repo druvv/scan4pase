@@ -111,7 +111,8 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
     @objc func calculateTotals() {
         resetTotals()
 
-		let roundUP = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+		let roundNormal = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+        let roundTax = NSDecimalNumberHandler(roundingMode: .plain, scale: 5, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
 
 		var retailCostTaxTotal: NSDecimalNumber = 0
 
@@ -121,28 +122,28 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 
 			quantityTotal = quantityTotal.adding(quantity)
 
-			let qPV = product.pv!.multiplying(by: quantity, withBehavior: roundUP)
-			let qBV = product.bv!.multiplying(by: quantity, withBehavior: roundUP)
-			let qRetailCost = product.retailCost!.multiplying(by: quantity, withBehavior: roundUP)
-			let qIboCost = product.iboCost!.multiplying(by: quantity, withBehavior: roundUP)
+			let qPV = product.pv!.multiplying(by: quantity, withBehavior: roundNormal)
+			let qBV = product.bv!.multiplying(by: quantity, withBehavior: roundNormal)
+			let qRetailCost = product.retailCost!.multiplying(by: quantity, withBehavior: roundNormal)
+			let qIboCost = product.iboCost!.multiplying(by: quantity, withBehavior: roundNormal)
 
 			if let taxPercentage = UserDefaults.standard.object(forKey: "taxPercentage") as? NSNumber, cartProduct.taxable!.boolValue {
 				var taxPercentage = NSDecimalNumber(decimal: taxPercentage.decimalValue)
-				taxPercentage = taxPercentage.multiplying(byPowerOf10: -2, withBehavior: roundUP)
+				taxPercentage = taxPercentage.multiplying(byPowerOf10: -2, withBehavior: roundTax)
 
-				let retailTax = qRetailCost.multiplying(by: taxPercentage, withBehavior: roundUP)
+				let retailTax = qRetailCost.multiplying(by: taxPercentage, withBehavior: roundNormal)
 
-				retailCostTaxTotal = retailCostTaxTotal.adding(retailTax, withBehavior: roundUP)
+				retailCostTaxTotal = retailCostTaxTotal.adding(retailTax, withBehavior: roundNormal)
 			}
 
-			pvTotal = pvTotal.adding(qPV, withBehavior: roundUP)
-			bvTotal = bvTotal.adding(qBV, withBehavior: roundUP)
-			retailCostSubtotal = retailCostSubtotal.adding(qRetailCost, withBehavior: roundUP)
-			iboCostSubtotal = iboCostSubtotal.adding(qIboCost, withBehavior: roundUP)
+			pvTotal = pvTotal.adding(qPV, withBehavior: roundNormal)
+			bvTotal = bvTotal.adding(qBV, withBehavior: roundNormal)
+			retailCostSubtotal = retailCostSubtotal.adding(qRetailCost, withBehavior: roundNormal)
+			iboCostSubtotal = iboCostSubtotal.adding(qIboCost, withBehavior: roundNormal)
 		}
 
-		retailCostGrandTotal = retailCostSubtotal.adding(retailCostTaxTotal, withBehavior: roundUP)
-		iboCostGrandTotal = iboCostSubtotal.adding(retailCostTaxTotal, withBehavior: roundUP)
+		retailCostGrandTotal = retailCostSubtotal.adding(retailCostTaxTotal, withBehavior: roundNormal)
+		iboCostGrandTotal = iboCostSubtotal.adding(retailCostTaxTotal, withBehavior: roundNormal)
 
 		navigationController?.navigationBar.topItem?.title = "Cart(\(quantityTotal.stringValue))"
 

@@ -11,7 +11,7 @@ import MagicalRecord
 import FirebaseStorage
 
 class ProductService {
-	class func importProducts(_ completion: @escaping (Bool, NSError?) -> Void) {
+	class func importProducts(_ completion: @escaping (Bool, Date?, NSError?) -> Void) {
 		let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
 		let documentsDirectory = paths[0]
 		let filePath = documentsDirectory + "/products.csv"
@@ -26,27 +26,34 @@ class ProductService {
 		if FileManager.default.fileExists(atPath: filePath) {
 			fileRef.write(toFile: URL(fileURLWithPath: filePath), completion: { _, error in
 				if (error != nil) {
-					completion(true, nil)
+					completion(true, nil, nil)
 				} else {
 					do {
-						try parseProducts()
+                        try parseProducts()
+                        fileRef.getMetadata(completion: { (metadata, error) in
+                            if let metadata = metadata, let updated = metadata.updated {
+                                completion(true, updated, nil)
+                            } else {
+                                completion(true, nil, nil)
+                            }
+                        })
 					} catch let error as NSError {
-						completion(false, error)
+						completion(false, nil, error)
 					}
-					completion(true, nil)
+					completion(true, nil, nil)
 				}
 			})
 		} else {
 			fileRef.write(toFile: URL(fileURLWithPath: filePath), completion: { _, error in
 				if (error != nil) {
-					completion(false, error as NSError?)
+					completion(false, nil, error as NSError?)
 				} else {
                     do {
                         try parseProducts()
                     } catch let error as NSError {
-                        completion(false, error)
+                        completion(false, nil, error)
                     }
-					completion(true, nil)
+					completion(true, nil, nil)
 				}
 			})
 		}

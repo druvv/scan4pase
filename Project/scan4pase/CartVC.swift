@@ -43,6 +43,7 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 	@IBOutlet var pvBVLabel: UILabel!
 	@IBOutlet var subtotalLabel: UILabel!
 	@IBOutlet var grandTotalLabel: UILabel!
+    @IBOutlet var priceUpdatedLabel: UILabel!
 	@IBOutlet var checkout: UIButton!
 
 	@IBOutlet var loadingView: UIView!
@@ -78,7 +79,7 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 	func loadProducts() {
 		startLoadingAnimation()
 		UIApplication.shared.beginIgnoringInteractionEvents()
-		ProductService.importProducts({ successful, _ in
+		ProductService.importProducts({ successful, date, _ in
 			DispatchQueue.main.async(execute: {
 				UIApplication.shared.endIgnoringInteractionEvents()
 				if (!successful) {
@@ -91,6 +92,11 @@ class CartVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Cart
 				} else {
 					self.stopLoadingAnimation()
 					self.reloadCart()
+                    if let date = date {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "M/d/yy"
+                        self.priceUpdatedLabel.text = "Prices Last Updated: \(formatter.string(from: date))"
+                    }
 				}
 
 			})

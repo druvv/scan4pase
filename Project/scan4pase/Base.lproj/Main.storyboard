@@ -208,7 +208,10 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfY-I7-cP5">
-                                <rect key="frame" x="374" y="679" width="20" height="40"/>
+                                <rect key="frame" x="366" y="679" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="cdi-dM-ctx"/>
+                                </constraints>
                                 <state key="normal" image="flashlight"/>
                                 <connections>
                                     <action selector="toggleFlashlight:" destination="lYk-My-Jot" eventType="touchUpInside" id="S02-52-ySU"/>
@@ -222,7 +225,7 @@
                             <constraint firstItem="nO3-3N-5ua" firstAttribute="leading" secondItem="sTX-MJ-di9" secondAttribute="leadingMargin" constant="70" id="Rh1-wt-UpR"/>
                             <constraint firstItem="nO3-3N-5ua" firstAttribute="centerY" secondItem="sTX-MJ-di9" secondAttribute="centerY" id="V7T-KC-aIP"/>
                             <constraint firstItem="Nvi-1Z-dKf" firstAttribute="centerX" secondItem="sTX-MJ-di9" secondAttribute="centerX" id="auF-Aq-3CL"/>
-                            <constraint firstItem="nfY-I7-cP5" firstAttribute="trailing" secondItem="sTX-MJ-di9" secondAttribute="trailingMargin" id="deJ-8r-blv"/>
+                            <constraint firstAttribute="trailing" secondItem="nfY-I7-cP5" secondAttribute="trailing" constant="8" id="pSh-eY-wsN"/>
                             <constraint firstItem="i1S-hf-ENM" firstAttribute="top" secondItem="Nvi-1Z-dKf" secondAttribute="bottom" constant="17" id="th9-h5-njd"/>
                         </constraints>
                         <variation key="default">
@@ -232,13 +235,12 @@
                                 <exclude reference="nfY-I7-cP5"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="9N5-WI-dtM"/>
-                                <exclude reference="th9-h5-njd"/>
                                 <exclude reference="Fpt-1L-hQA"/>
                                 <exclude reference="Rh1-wt-UpR"/>
                                 <exclude reference="V7T-KC-aIP"/>
                                 <exclude reference="auF-Aq-3CL"/>
-                                <exclude reference="deJ-8r-blv"/>
+                                <exclude reference="9N5-WI-dtM"/>
+                                <exclude reference="th9-h5-njd"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -248,13 +250,12 @@
                                 <include reference="nfY-I7-cP5"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="9N5-WI-dtM"/>
-                                <include reference="th9-h5-njd"/>
                                 <include reference="Fpt-1L-hQA"/>
                                 <include reference="Rh1-wt-UpR"/>
                                 <include reference="V7T-KC-aIP"/>
                                 <include reference="auF-Aq-3CL"/>
-                                <include reference="deJ-8r-blv"/>
+                                <include reference="9N5-WI-dtM"/>
+                                <include reference="th9-h5-njd"/>
                             </mask>
                         </variation>
                     </view>
@@ -265,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wb2-v6-bFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="-936"/>
+            <point key="canvasLocation" x="2002.8985507246377" y="-936.68478260869574"/>
         </scene>
         <!--Cart-->
         <scene sceneID="JP0-Vy-j21">
